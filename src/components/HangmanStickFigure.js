@@ -1,5 +1,5 @@
 
-const hangman = () => {
+const HangmanStickfigure = () => {
     return(
         <div>
             hangman stickfigure
@@ -7,4 +7,4 @@ const hangman = () => {
     );
 }
 
-export default hangman;
+export default HangmanStickfigure;

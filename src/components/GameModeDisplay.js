@@ -1,5 +1,5 @@
 
-const GameMode = () => {
+const GameModeDisplay = () => {
     return(
         <div>
             GameMode Box
@@ -8,4 +8,4 @@ const GameMode = () => {
     );
 }
 
-export default GameMode;
+export default GameModeDisplay;

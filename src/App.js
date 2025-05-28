@@ -1,15 +1,15 @@
 import './App.css';
 import HangmanDisplay from './components/HangmanDisplay';
-import GameMode from './components/GameMode';
+import GameModeDisplay from './components/GameModeDisplay';
 import WordDisplay from './components/WordDisplay';
-import LetterInput from './components/LetterInput';
+import LetterInputDisplay from './components/LetterInputDisplay';
 function App() {
 
   return(
     <div>
-        <GameMode/>
+        <GameModeDisplay/>
         <WordDisplay/>
-        <LetterInput/>
+        <LetterInputDisplay/>
         <HangmanDisplay/>
     </div>
   );

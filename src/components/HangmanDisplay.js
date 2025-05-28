@@ -1,12 +1,12 @@
 import Counter from "./Counter";
-import Hangman from "./Hangman";
+import HangmanStickfigure from "./HangmanStickFigure";
 const HangmanDisplay = () => {
     return(
         <div>
             Hangman Display Box
             <div id="counter_container">
                 <Counter/>
-                <Hangman/>
+                <HangmanStickfigure/>
             </div>
         </div>
     );
