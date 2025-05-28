@@ -2,7 +2,7 @@
 const hangman = () => {
     return(
         <div>
-            Hangman Stickfigure
+            hangman stickfigure
         </div>
     );
 }

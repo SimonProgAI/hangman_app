@@ -2,7 +2,7 @@
 const Counter = ()=> {
     
     return (
-        <div>Counter</div>
+        <div>counter component</div>
     );
 }
 
