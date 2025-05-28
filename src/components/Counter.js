@@ -1,10 +1,9 @@
 
-const counter = ()=> {
-    let count = 0;
-    console.log(count + "hellooo");
+const Counter = ()=> {
+    
     return (
-        <div>this is a counter</div>
+        <div>Counter</div>
     );
 }
 
-export default counter;
+export default Counter;

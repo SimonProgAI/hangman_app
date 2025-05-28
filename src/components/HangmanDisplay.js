@@ -3,7 +3,7 @@ import Hangman from "./Hangman";
 const HangmanDisplay = () => {
     return(
         <div>
-            HangmanDisplay box here.
+            HangmanDisplay Box
             <div id="counter_container">
                 <Counter/>
                 <Hangman/>
