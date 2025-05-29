@@ -1,10 +1,17 @@
+import './components.css';
 
-const WordDisplay = ({userWord}) => {
+const WordDisplay = ({wordArr}) => {
     
+    const processedWordArr = wordArr.map((letter)=>{
+        return(
+            <span className="individual_letters">{letter}</span>
+        );
+    });
+
     return(
         <div>
             WordDisplay
-            <div>here is the userWord:{userWord}</div>
+            <div>{processedWordArr}</div>
         </div>
     );
 }

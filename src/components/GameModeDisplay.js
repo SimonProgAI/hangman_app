@@ -21,6 +21,7 @@ function GameModeDisplay(){
     const wordArr = userWord.split('');
     console.log(wordArr);
 
+
     
     return(
         <div>
@@ -32,7 +33,7 @@ function GameModeDisplay(){
                 </span>
             </div>
             <div>
-                <WordDisplay userWord={userWord}/>
+                <WordDisplay wordArr={wordArr}/>
             </div>
         </div>
         
