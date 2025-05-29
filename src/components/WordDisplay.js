@@ -1,8 +1,11 @@
 
-const WordDisplay = () => {
+const WordDisplay = ({userWord}) => {
+    
     return(
-        <div>Word Display Box</div>
-
+        <div>
+            WordDisplay
+            <div>here is the userWord:{userWord}</div>
+        </div>
     );
 }
 
