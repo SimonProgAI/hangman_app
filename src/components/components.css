@@ -1,5 +1,9 @@
-.individual_letters{
+.revealed_letter{
   font-weight: bolder;
   border-style: none none solid none;
   margin: 0.5rem;
+}
+
+.hidden_letter{
+  visibility: hidden;
 }

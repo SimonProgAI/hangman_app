@@ -11,6 +11,12 @@ const WordDisplay = ({wordArr}) => {
     const userInput = "l";
     //let test = wordArr.findIndex((letter) => letter===userInput );
     
+    /*const processedWordArr = wordArr.map((letter)=>{
+        return(
+            <span className="individual_letters">{letter}</span>
+        );
+    });*/ 
+    
     for(const [index, value] of wordArr.entries()){
         //console.log(`index: ${index}, value: ${value}`);
         if(value===userInput){
@@ -21,13 +27,6 @@ const WordDisplay = ({wordArr}) => {
             //the letter is hidden
         }
     }                      
-    
-
-    /*const processedWordArr = wordArr.map((letter)=>{
-        return(
-            <span className="individual_letters">{letter}</span>
-        );
-    });*/ 
 
     return(
         <div>
