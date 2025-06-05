@@ -12,10 +12,9 @@ const WordDisplay = ({wordArr}) => {
 
     const userInput = "l";
     const [visibilityArr, setVisibilityArr] = useState([]);
-    const [visibilityStyle, setVisibilityStyle] = useState({})
+    const [visibilityStyle, setVisibilityStyle] = useState({visibility: 'visible'})
     
     useEffect(()=>{
-        
         wordArr.forEach((letter, index) => {
             if(letter === userInput){
                 console.log(`Letter ${letter} at index ${index} is revealed`);
@@ -29,21 +28,30 @@ const WordDisplay = ({wordArr}) => {
         );
     },[wordArr,visibilityArr])
     console.log(visibilityArr);
-    //create a function that maps over wordArr 
-    //and conditionally renders each letter based on the value in visibilityArr
-    const letterRenderer = ()=>{
-        wordArr.map(()=>{
-
-        })
-
-    }
-
-
+    /*Your thinking is sound. You want to create a function that maps over the wordArr 
+    and conditionally renders each letter based on the corresponding value in visibilityArr. 
+    If visibilityArr[index] is true, the letter at wordArr[index] should be visible, 
+    and if it's false, the letter should be hidden.
+    
+    You can use the map function to achieve this, and within the callback function, 
+    you can use a conditional statement to determine whether to render the letter or a placeholder 
+    (like an underscore or a blank space) based on the value of visibilityArr[index].
+    Additionally, you might want to consider adding a check to ensure that visibilityArr 
+    has the same length as wordArr before trying to access its elements, to avoid any potential errors.
+    */
+    let processedWordArr = wordArr.map( (letter,index)=>{
+        //if the index of visibilityArr has a value of true --> index in wordArr <style = visibility: 'visible'>
+        //else --> <style = visibility: 'visible'>
+        
+        return (
+            <span style={visibilityStyle}>{letter}{index}</span>
+        )
+    })
 
     return(
         <div>
             WordDisplay
-            <div>{}</div>
+            <div>{processedWordArr}</div>
         </div>
     );
 }
