@@ -17,31 +17,31 @@ const WordDisplay = ({wordArr}) => {
     useEffect(()=>{
         wordArr.forEach((letter, index) => {
             if(letter === userInput){
-                console.log(`Letter ${letter} at index ${index} is revealed`);
+                //console.log(`Letter ${letter} at index ${index} is revealed`);
                 visibilityArr.push(true)
             }else{
-                console.log(`Letter ${letter} at index ${index} is hidden`);
+                //console.log(`Letter ${letter} at index ${index} is hidden`);
                 visibilityArr.push(false)
             }
-            setVisibilityArr(visibilityArr);
         }
         );
+        setVisibilityArr(visibilityArr);
     },[wordArr,visibilityArr])
-    console.log(visibilityArr);
-    /*Your thinking is sound. You want to create a function that maps over the wordArr 
-    and conditionally renders each letter based on the corresponding value in visibilityArr. 
-    If visibilityArr[index] is true, the letter at wordArr[index] should be visible, 
-    and if it's false, the letter should be hidden.
+    console.log(`visibilityArr:${visibilityArr}`);
     
-    You can use the map function to achieve this, and within the callback function, 
-    you can use a conditional statement to determine whether to render the letter or a placeholder 
-    (like an underscore or a blank space) based on the value of visibilityArr[index].
-    Additionally, you might want to consider adding a check to ensure that visibilityArr 
-    has the same length as wordArr before trying to access its elements, to avoid any potential errors.
-    */
     let processedWordArr = wordArr.map( (letter,index)=>{
+        
+        if(wordArr.length!==visibilityArr.length){
+            console.log('Error, visibilityArr.length and wordArr.length do not match')
+        }
+        if (visibilityArr[index]===true){
+            //console.log(`${letter} should be revealed`)
+            
+        }else{
+            //console.log(`${letter} should be hidden`)
+        }
         //if the index of visibilityArr has a value of true --> index in wordArr <style = visibility: 'visible'>
-        //else --> <style = visibility: 'visible'>
+            //else --> <style = visibility: 'visible'>
         
         return (
             <span style={visibilityStyle}>{letter}{index}</span>

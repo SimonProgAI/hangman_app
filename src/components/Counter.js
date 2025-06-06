@@ -1,9 +1,9 @@
 
-const Counter = ()=> {
+const CounterDisplay = ()=> {
     
     return (
         <div>counter component</div>
     );
 }
 
-export default Counter;
+export default CounterDisplay;
