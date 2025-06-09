@@ -1,5 +1,4 @@
 import CounterDisplay from "./Counter";
-
 import HangmanStickfigure from "./HangmanStickFigure";
 const HangmanDisplay = () => {
     return(

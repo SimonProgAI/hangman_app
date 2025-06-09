@@ -8,7 +8,7 @@ import {useState, useEffect} from 'react';
     //array.includes -- If contains a certain value, returns true or false.
     //map.has --
     //map.delete
-const WordDisplay = ({wordArr}) => {
+/*const WordDisplay = ({wordArr}) => {
 
     const userInput = "l";
     const [visibilityArr, setVisibilityArr] = useState([]);
@@ -47,10 +47,10 @@ const WordDisplay = ({wordArr}) => {
 
     return(
         <div>
-            WordDisplay
             <div>{processedWordArr}</div>
         </div>
     );
 }
 
 export default WordDisplay;
+*/
