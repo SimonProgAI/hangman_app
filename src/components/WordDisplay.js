@@ -26,7 +26,7 @@ const WordDisplay = ({wordArr}) => {
             }
         });
         setVisibilityArr(tempVisibilityArr);
-    },[wordArr])
+    },[wordArr]);
     
     //console.log(`visibilityArr:${visibilityArr}`);
     
@@ -38,13 +38,12 @@ const WordDisplay = ({wordArr}) => {
         if (visibilityArr[index]===true){
             //console.log(`${letter} should be revealed`)
             return <span style={{visibility: 'visible'}}>{letter}</span> 
-
         }
         if (visibilityArr[index]===false){
             //console.log(`${letter} should be hidden`)
             return <span style={{visibility: 'hidden'}}>{letter}</span>
         }
-    })
+    });
 
     return(
         <div>
