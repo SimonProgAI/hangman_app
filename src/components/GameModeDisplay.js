@@ -1,7 +1,8 @@
 //import react from "react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import WordDisplay from "./WordDisplay";
+import HangmanStickfigure from "./HangmanStickFigure";
 
 function GameModeDisplay(){
 //USER_CREATED_WORD 
@@ -11,21 +12,37 @@ function GameModeDisplay(){
     const createUserWord = (e)=>{ 
         e.preventDefault();
         const userWord = userWordRef.current.value;
-        setUserWord(userWord);
+        setUserWord(userWord.toUpperCase());
         //console.log(`function createUserWord called`);
         return userWord;
     }
-    
     //console.log(`userWord set to ${userWord}`);
 
-    let wordArr = userWord.split('');
+    let wordArr = useMemo(()=>userWord.split(''),[userWord]);
     //console.log(wordArr);
+    
+    
+            
+   
+
 //USER_INPUT    
     const [userInput, setUserInput] = useState("");
+    const [count, setCount] = useState(0);
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    function handleUserInput(){
-        console.log(`function handleUserInput called`)
+    const handleUserInput = (letter, index) => {
+        setUserInput(letter);
+        if(wordArr.includes(letter)===false){
+            setCount(count+1)
+        }else if(wordArr.includes(letter)===true){
+            setButtonDisabled(true);
+            console.log(`buttonDisabled = ${buttonDisabled}`)
+        }
+        console.log(`count is ${count+1}`); //count+1 is a workaround solution, maybe rework later
+        //console.log(`function handleUserInput called`);
+        //console.log(`userInput: ${letter}`);
     }
+    
 //WORD_DISPLAY
     
     const [visibilityArr, setVisibilityArr] = useState([]);
@@ -43,7 +60,7 @@ function GameModeDisplay(){
             }
         });
         setVisibilityArr(tempVisibilityArr);
-    },[wordArr]);
+    },[wordArr, userInput]);
     
     //console.log(`visibilityArr:${visibilityArr}`);
     
@@ -74,7 +91,11 @@ function GameModeDisplay(){
                 {processedWordArr}
             </div>
             <div>
-                <LetterInputDisplay wordArr={wordArr} visibilityArr={visibilityArr} handleUserInput={handleUserInput}/>
+                <LetterInputDisplay wordArr={wordArr} handleUserInput={handleUserInput} 
+                buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}/>
+            </div>
+            <div>
+                <HangmanStickfigure count={count}/>
             </div>
         </div>
     );

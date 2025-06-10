@@ -1,17 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 
-const HangmanStickfigure = () => {
-    
-    const count = 0;
+const HangmanStickfigure = ({count}) => {
     
     const headColor = count>0 ? 'black': 'white';
-    const torsoColor = count>=1 ? 'black': 'white';
-    const leftArmColor = count>=2 ? 'black': 'white';
-    const rightArmColor = count>=3 ? 'black': 'white';
-    const leftLegColor = count>=4 ? 'black': 'white';
-    const rightLegColor = count>=5 ? 'black': 'white';
+    const torsoColor = count>1 ? 'black': 'white';
+    const leftArmColor = count>2 ? 'black': 'white';
+    const rightArmColor = count>3 ? 'black': 'white';
+    const leftLegColor = count>4 ? 'black': 'white';
+    const rightLegColor = count>5 ? 'black': 'white';
 
-    //look into clipping or similar techniques to hide the white holes in the torso
+    //Look into clipping or similar techniques to hide the white holes in the torso.
     return (
         <div>
             <svg width="300" height="300" >
