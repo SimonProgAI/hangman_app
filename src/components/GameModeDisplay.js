@@ -42,7 +42,12 @@ function GameModeDisplay(){
         //console.log(`function handleUserInput called`);
         //console.log(`userInput: ${letter}`);
     }
-    
+    /*
+        Keep track of the guessed letters and disable the buttons based on whether the letter has been guessed or not.
+        Think about how you can modify your handleUserInput function 
+        and LetterInputDisplay component to track and disable individual buttons. 
+        You might want to consider using an array or object to keep track of the guessed letters.
+    */
 //WORD_DISPLAY
     
     const [visibilityArr, setVisibilityArr] = useState([]);
