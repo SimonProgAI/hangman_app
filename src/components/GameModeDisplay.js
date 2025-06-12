@@ -21,33 +21,26 @@ function GameModeDisplay(){
     let wordArr = useMemo(()=>userWord.split(''),[userWord]);
     //console.log(wordArr);
     
-    
-            
-   
-
 //USER_INPUT    
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
-    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [guessedLetters, setGuessedLetters] = useState([]);
+    //const [isDisabled, setIsDisabled] = useState(false);
 
     const handleUserInput = (letter, index) => {
         setUserInput(letter);
+       
         if(wordArr.includes(letter)===false){
-            setCount(count+1)
+            setCount(count+1);
         }else if(wordArr.includes(letter)===true){
-            setButtonDisabled(true);
-            console.log(`buttonDisabled = ${buttonDisabled}`)
+            setGuessedLetters([...guessedLetters, letter])
         }
-        console.log(`count is ${count+1}`); //count+1 is a workaround solution, maybe rework later
+        //console.log(`guessedLetters: ${guessedLetters}`)
+        //console.log(`count is ${count+1}`); //count+1 is a workaround solution, maybe rework later
         //console.log(`function handleUserInput called`);
         //console.log(`userInput: ${letter}`);
     }
-    /*
-        Keep track of the guessed letters and disable the buttons based on whether the letter has been guessed or not.
-        Think about how you can modify your handleUserInput function 
-        and LetterInputDisplay component to track and disable individual buttons. 
-        You might want to consider using an array or object to keep track of the guessed letters.
-    */
+  
 //WORD_DISPLAY
     
     const [visibilityArr, setVisibilityArr] = useState([]);
@@ -96,8 +89,7 @@ function GameModeDisplay(){
                 {processedWordArr}
             </div>
             <div>
-                <LetterInputDisplay wordArr={wordArr} handleUserInput={handleUserInput} 
-                buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}/>
+                <LetterInputDisplay handleUserInput={handleUserInput} guessedLetters={guessedLetters} />
             </div>
             <div>
                 <HangmanStickfigure count={count}/>

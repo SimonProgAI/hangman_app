@@ -1,6 +1,7 @@
 
-const LetterInputDisplay = ({wordArr, handleUserInput, buttonDisabled}) => {
-    
+const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
+    /*In the LetterInputDisplay component, 
+    check if the letter is in the guessedLetters array and disable the button accordingly.*/
     const btnRows= [
         [//ROW_1
             {letter:'Q', disabled: false},
