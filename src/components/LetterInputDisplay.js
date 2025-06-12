@@ -42,9 +42,9 @@ const LetterInputDisplay = ({wordArr, handleUserInput, buttonDisabled}) => {
         const btnRows1_3 = rowArr.map((btn, index)=>{
             
             return(
-                    <span>
-                        <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
-                    </span>
+                <span>
+                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
+                </span>
             )
             })
         
