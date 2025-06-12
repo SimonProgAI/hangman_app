@@ -1,14 +1,9 @@
 
 const LetterInputDisplay = ({wordArr, handleUserInput, buttonDisabled}) => {
     
-    //TO REFACTOR LATER
-    /*const letters_1stRow_arr = ['Q','W','E','R','T','Y','U','I','O','P'];
-    const letters_2ndRow_arr = ['A','S','D','F','G','H','J','K','L'];
-    const letters_3rdRow_arr = ['Z','X','C','V','B','N','M'];*/
-    
     const btnRows= [
         [//ROW_1
-            {letter:'Q', disabled: true},
+            {letter:'Q', disabled: false},
             {letter:'W', disabled: false},
             {letter:'E', disabled: false},
             {letter:'R', disabled: false},
@@ -22,7 +17,7 @@ const LetterInputDisplay = ({wordArr, handleUserInput, buttonDisabled}) => {
         [//ROW_2
             {letter:'A', disabled: false},
             {letter:'S', disabled: false},
-            {letter:'D', disabled: true},
+            {letter:'D', disabled: false},
             {letter:'F', disabled: false},
             {letter:'G', disabled: false},
             {letter:'H', disabled: false},
@@ -35,54 +30,35 @@ const LetterInputDisplay = ({wordArr, handleUserInput, buttonDisabled}) => {
             {letter:'X', disabled: false},
             {letter:'C', disabled: false},
             {letter:'V', disabled: false},
-            {letter:'B', disabled: true},
+            {letter:'B', disabled: false},
             {letter:'N', disabled: false},
             {letter:'M', disabled: false}
         ]
 
     ];
-    //I must map over the arrays inside the big array. This is currently not working.
-    const btnRow1 = btnRows[0].map((btn, index)=>{
-        console.log(btn.length)
-        return(
-            <span>
-                <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
-            </span>
-        )
+    
+    const btnInput = btnRows.map((rowArr, index)=>{
         
-    });
-    const btnRow2 = btnRows[1].map((btn, index)=>{
-        console.log(btn.length)
-        return(
-            <span>
-                <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
-            </span>
-        )
+        const btnRows1_3 = rowArr.map((btn, index)=>{
+            
+            return(
+                    <span>
+                        <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
+                    </span>
+            )
+            })
         
-    });
-    const btnRow3 = btnRows[2].map((btn, index)=>{
-        console.log(btn.length)
         return(
-            <span>
-                <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
-            </span>
+            <div>
+                {btnRows1_3}
+            </div>
         )
-        
     });
 
-    
     return(
-        <div>
             <div>
-                {btnRow1}
+                {btnInput}
             </div>
-            <div>
-                {btnRow2}
-            </div>
-            <div>
-                {btnRow3}
-            </div>
-        </div>
     );
 }
  
