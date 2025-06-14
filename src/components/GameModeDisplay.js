@@ -89,7 +89,7 @@ function GameModeDisplay(){
                 {processedWordArr}
             </div>
             <div>
-                <LetterInputDisplay handleUserInput={handleUserInput} guessedLetters={guessedLetters} />
+                <LetterInputDisplay handleUserInput={handleUserInput} guessedLetters={guessedLetters} userInput={userInput} />
             </div>
             <div>
                 <HangmanStickfigure count={count}/>

@@ -1,9 +1,9 @@
 
-const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
+const LetterInputDisplay = ({handleUserInput, guessedLetters, userInput}) => {
     /*In the LetterInputDisplay component, 
     check if the letter is in the guessedLetters array and disable the button accordingly.*/
     const btnRows= [
-        [//ROW_1
+        [//rowArr_1
             {letter:'Q', disabled: false},
             {letter:'W', disabled: false},
             {letter:'E', disabled: false},
@@ -15,7 +15,7 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
             {letter:'O', disabled: false},
             {letter:'P', disabled: false}
         ],
-        [//ROW_2
+        [//rowArr_2
             {letter:'A', disabled: false},
             {letter:'S', disabled: false},
             {letter:'D', disabled: false},
@@ -26,7 +26,7 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
             {letter:'K', disabled: false},
             {letter:'L', disabled: false}
         ],
-        [//ROW_3
+        [//rowArr_3
             {letter:'Z', disabled: false},
             {letter:'X', disabled: false},
             {letter:'C', disabled: false},
@@ -37,6 +37,15 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
         ]
 
     ];
+    console.log(`guessedLetters: ${guessedLetters}`)
+    /*
+    //useInput not readable
+    if (btnRows[0].includes(btnRows[0].letter.userInput)){
+        console.log(btnRows[0].letter)
+    }else{
+        console.log('error')
+    }
+    */
     
     const btnInput = btnRows.map((rowArr, index)=>{
         
