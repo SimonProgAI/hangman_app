@@ -1,17 +1,34 @@
 //import react from "react";
 import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
-import WordDisplay from "./WordDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
-
+//**no empty strings
+//no digits in userWord
+//no space in userWord
+//no consecutive hyphens in userWords
+//no userInput before userWord is created
+//no userInput after word is fully guessed
+//no userInput after 6 wrong guesses
+//HangmanStickfigure should not show traces of white limbs over black limbs 
+//GameWon Screen if word fully guessed in less than 6 guesses
+//GameOver Screen after 6 wrong guesses
+//Return to initial state after GameOver/GameWon screen
+//Persistence before GameWon/GameOver screen
 function GameModeDisplay(){
 //USER_CREATED_WORD 
     const userWordRef = useRef();
+    const errMsgRef = useRef();
     const [userWord, setUserWord] = useState("");
+    const [errMsg, setErrMsg] = useState("");
     
     const createUserWord = (e)=>{ 
         e.preventDefault();
         const userWord = userWordRef.current.value;
+        if(userWord.length<1){
+            setErrMsg("Word must contain at least one letter.")
+        }else if(/*userWord contains anything other */){
+
+        }
         setUserWord(userWord.toUpperCase());
         //console.log(`function createUserWord called`);
         return userWord;
@@ -25,8 +42,7 @@ function GameModeDisplay(){
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
     const [guessedLetters, setGuessedLetters] = useState([]);
-    //const [isDisabled, setIsDisabled] = useState(false);
-
+    
     const handleUserInput = (letter, index) => {
         setUserInput(letter);
        
@@ -82,7 +98,7 @@ function GameModeDisplay(){
             <div>
                 <span>
                     <button onClick={createUserWord}>User Selected</button>
-                    <input type="text" ref={userWordRef}></input>
+                    <input type="text" ref={userWordRef}></input><span ref={errMsgRef}>{errMsg}</span>
                 </span>
             </div>
             <div>
@@ -95,7 +111,8 @@ function GameModeDisplay(){
                 <HangmanStickfigure count={count}/>
             </div>
         </div>
-    );
-}
+    )
+};
+
 
 export default GameModeDisplay;
