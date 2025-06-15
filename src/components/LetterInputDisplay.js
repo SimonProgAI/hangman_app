@@ -39,21 +39,22 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters, userInput}) => {
     ];
     console.log(`guessedLetters: ${guessedLetters}`)
     /*
-    //useInput not readable
-    if (btnRows[0].includes(btnRows[0].letter.userInput)){
-        console.log(btnRows[0].letter)
-    }else{
-        console.log('error')
-    }
-    */
-    
+    const btnDisabler = btnRows.map((rowArr, index)=> {
+        const btnRows1_3 = rowArr.map((btn, index)=> {
+            if (guessedLetters.includes(btn.letter)){
+                
+            }
+        })
+
+    })
+*/
     const btnInput = btnRows.map((rowArr, index)=>{
         
         const btnRows1_3 = rowArr.map((btn, index)=>{
             
             return(
                 <span>
-                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={btn.disabled}>{btn.letter}</button>
+                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={guessedLetters.includes(btn.letter)}>{btn.letter}</button>
                 </span>
             )
             })
