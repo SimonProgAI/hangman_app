@@ -49,7 +49,7 @@ function GameModeDisplay(){
     useEffect(()=>{
         let tempVisibilityArr = [];
         wordArr.forEach((letter, index) => {
-            if(letter === userInput){
+            if(guessedLetters.includes(letter)){
                 //console.log(`Letter ${letter} at index ${index} is revealed`);
                 tempVisibilityArr.push(true)
             }else{
@@ -62,7 +62,7 @@ function GameModeDisplay(){
     
     //console.log(`visibilityArr:${visibilityArr}`);
     
-    let processedWordArr = wordArr.map( (letter,index)=>{
+    let processedWordArr = wordArr.map((letter,index)=>{
         
         if(wordArr.length!==visibilityArr.length){
             //console.log('Error, visibilityArr.length and wordArr.length do not match')

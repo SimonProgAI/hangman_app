@@ -1,7 +1,6 @@
 
-const LetterInputDisplay = ({handleUserInput, guessedLetters, userInput}) => {
-    /*In the LetterInputDisplay component, 
-    check if the letter is in the guessedLetters array and disable the button accordingly.*/
+const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
+    
     const btnRows= [
         [//rowArr_1
             {letter:'Q', disabled: false},
@@ -37,17 +36,7 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters, userInput}) => {
         ]
 
     ];
-    console.log(`guessedLetters: ${guessedLetters}`)
-    /*
-    const btnDisabler = btnRows.map((rowArr, index)=> {
-        const btnRows1_3 = rowArr.map((btn, index)=> {
-            if (guessedLetters.includes(btn.letter)){
-                
-            }
-        })
-
-    })
-*/
+    
     const btnInput = btnRows.map((rowArr, index)=>{
         
         const btnRows1_3 = rowArr.map((btn, index)=>{
