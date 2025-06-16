@@ -1,5 +1,5 @@
 
-const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
+const LetterInputDisplay = ({userWord, handleUserInput, guessedLetters, count, hasWon}) => {
     
     const btnRows= [
         [//rowArr_1
@@ -41,9 +41,16 @@ const LetterInputDisplay = ({handleUserInput, guessedLetters}) => {
         
         const btnRows1_3 = rowArr.map((btn, index)=>{
             
+            function keyboardStatus(){
+                if (userWord===""||count===6||hasWon===true){
+                    return true
+                }else{
+                    return guessedLetters.includes(btn.letter)
+                }
+            }
             return(
                 <span>
-                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={guessedLetters.includes(btn.letter)}>{btn.letter}</button>
+                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={keyboardStatus()}>{btn.letter}</button>
                 </span>
             )
             })

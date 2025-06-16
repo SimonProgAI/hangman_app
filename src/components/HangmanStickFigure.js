@@ -1,5 +1,3 @@
-import React, { useRef, useEffect } from 'react';
-
 const HangmanStickfigure = ({count}) => {
     
     const headColor = count>0 ? 'black': 'white';
