@@ -42,16 +42,14 @@ function GameModeDisplay(){
         setWord(userWord);
         return userWord;
     }
-    console.log(`userWord is set to ${userWord}`);
+    //console.log(`userWord is set to ${userWord}`);
     
 
 //RANDOM_WORD_API
     
     const [randomWord, setRandomWord] = useState("");
-    const randomWordLengthRef = useRef();//need to set the length as a variable in the API url.
-    
-  
-    //console.log(randomWordLength);
+    const randomWordLengthRef = useRef();
+
     const handleRandomWord = () => {
         //console.log('function handleRandomWord called')
         
@@ -61,22 +59,19 @@ function GameModeDisplay(){
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const randomWord = data[0]
-                setRandomWord(randomWord.toUpperCase());
+                const randomWord = data[0];
+                setRandomWord(randomWord);
+                setWord(randomWord.toUpperCase());
             })
             .catch((error)=>alert(errorAlert));
-        setWord(randomWord)  
-
+          
     }
-    console.log(`randomWord is set to ${randomWord}`);
+    //console.log(`randomWord is set to ${randomWord}`);
 
 //WORDARR
-    //if randomWord or userWord
-    console.log(`gameMode set to: ${word}`)
-    let wordArr = useMemo(()=>word.split(''),[userWord, randomWord]);
-    
+    let wordArr = useMemo(()=>word.split(''),[word]);
+    console.log(`word set to ${word}`)
     //console.log(wordArr);
-    //console.log(gameMode);
 //USER_INPUT    
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
