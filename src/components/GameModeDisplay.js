@@ -2,10 +2,10 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
 //TO-DO 
-    //HangmanStickfigure should not show traces of white limbs over black limbs 
     //Return to initial state after GameOver/GameWon screen
     //Persistence before GameWon/GameOver screen (userWord, wordArr, count, guessedLetters, visibilityArr)
     //Restart button to replace the refresh button that clears out the sessionStorage.
+    //HangmanStickfigure should not show traces of white limbs over black limbs
 
 function GameModeDisplay(){
 //USER_CREATED_WORD 
