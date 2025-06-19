@@ -1,5 +1,5 @@
 
-const LetterInputDisplay = ({userWord, handleUserInput, guessedLetters, count, hasWon}) => {
+const LetterInputDisplay = ({word, handleUserInput, guessedLetters, hasWon, hasLost}) => {
     
     const btnRows= [
         [//rowArr_1
@@ -42,7 +42,7 @@ const LetterInputDisplay = ({userWord, handleUserInput, guessedLetters, count, h
         const btnRows1_3 = rowArr.map((btn, index)=>{
             
             function keyboardStatus(){
-                if (userWord===""||count===6||hasWon===true){
+                if (word===""||hasLost===true||hasWon===true){
                     return true
                 }else{
                     return guessedLetters.includes(btn.letter)

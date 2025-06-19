@@ -1,23 +1,12 @@
-//import react from "react";
 import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
-//**no empty strings
-//**no digits in userWord
-//**no space in userWord
-//**no consecutive hyphens in userWords
-//hyphens may not begin or end the word
-//hyphens are always visible
-//**userWord disapears from input box when created
-//**no userInput before userWord is created
-//**no userInput after word is fully guessed
-//**no userInput after 6 wrong guesses
-//HangmanStickfigure should not show traces of white limbs over black limbs 
-//GameWon Screen if word fully guessed in less than 6 guesses
-//GameOver Screen after 6 wrong guesses
-//GameOver Screen displays the Word
-//Return to initial state after GameOver/GameWon screen
-//Persistence before GameWon/GameOver screen
+//TO-DO 
+    //Random word API 
+    //HangmanStickfigure should not show traces of white limbs over black limbs 
+    //Return to initial state after GameOver/GameWon screen
+    //Persistence before GameWon/GameOver screen (userWord, wordArr, count, guessedLetters, visibilityArr)
+    //Restart button to replace the refresh button that clears out the sessionStorage.
 
 function GameModeDisplay(){
 //USER_CREATED_WORD 
@@ -25,9 +14,12 @@ function GameModeDisplay(){
     const errMsgRef = useRef();
     const [userWord, setUserWord] = useState("");
     const [errMsg, setErrMsg] = useState("");
+    const [word, setWord] = useState("");
     
     
     const createUserWord = ()=>{ 
+        //console.log(`function createUserWord called`);
+        
         const userWord = userWordRef.current.value;
         function hasOnlyLetters(word){
             return /^[a-zA-Z]+$/.test(word)
@@ -39,21 +31,52 @@ function GameModeDisplay(){
             setErrMsg("Word must contain at least one letter.")
         }else if(userWord.includes("--")){
             setErrMsg("Word cannot contain two consecutive hyphens.")
+        }else if (userWord.startsWith("-")||userWord.endsWith("-")){
+            setErrMsg("Word cannot begin or end with an hyphen.")
         }else if (hasOnlyLetters(userWord)||hasOnlyLettersAndHyphen(userWord)){
             setUserWord(userWord.toUpperCase());
         }else{
             setErrMsg("Word must contain letters and can contain one hyphen.")
         }
-        
-        userWordRef.current.value= "";
-        //console.log(`function createUserWord called`);
+        userWordRef.current.value="";
+        setWord(userWord);
         return userWord;
     }
-    //console.log(`userWord set to ${userWord}`);
-
-    let wordArr = useMemo(()=>userWord.split(''),[userWord]);
-    console.log(wordArr);
+    console.log(`userWord is set to ${userWord}`);
     
+
+//RANDOM_WORD_API
+    
+    const [randomWord, setRandomWord] = useState("");
+    const randomWordLengthRef = useRef();//need to set the length as a variable in the API url.
+    
+  
+    //console.log(randomWordLength);
+    const handleRandomWord = () => {
+        //console.log('function handleRandomWord called')
+        
+        const randomWordLength = Number(randomWordLengthRef.current.value);
+        const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
+        const errorAlert = 'Something went wrong while fetching your request. Please try again.';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const randomWord = data[0]
+                setRandomWord(randomWord.toUpperCase());
+            })
+            .catch((error)=>alert(errorAlert));
+        setWord(randomWord)  
+
+    }
+    console.log(`randomWord is set to ${randomWord}`);
+
+//WORDARR
+    //if randomWord or userWord
+    console.log(`gameMode set to: ${word}`)
+    let wordArr = useMemo(()=>word.split(''),[userWord, randomWord]);
+    
+    //console.log(wordArr);
+    //console.log(gameMode);
 //USER_INPUT    
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
@@ -66,17 +89,29 @@ function GameModeDisplay(){
         if(wordArr.includes(letter)===false){
             setCount(count+1);
         }else if(wordArr.includes(letter)===true){
-            setGuessedLetters([...guessedLetters, letter])
-        }
-        console.log(`guessedLetters: ${guessedLetters}`)
+             setGuessedLetters([...guessedLetters, letter]) 
+        } 
+        //console.log(`guessedLetters: ${guessedLetters}`)
         //console.log(`count is ${count+1}`); //count+1 is a workaround solution, maybe rework later
         //console.log(`function handleUserInput called`);
         //console.log(`userInput: ${letter}`);
     }
+ 
 
+//SUCCESS/FAILURE
     const hasWon = wordArr.every(letter => guessedLetters.includes(letter)) ? true: false;
-
-    
+    const hasLost = count===6 ? true: false;
+    const won_lossMsg = () => {
+        if (hasWon===true&&guessedLetters.length!==0){
+            return(
+                <div>Success!</div>
+            )
+        }else if (hasLost===true){
+            return(
+                <div>Wrong! The word was "{wordArr.join("")}"</div>
+            )
+        }
+    }
   
 //WORD_DISPLAY
     
@@ -117,6 +152,12 @@ function GameModeDisplay(){
         <div>
             <div>
                 <span>
+                <button onClick={handleRandomWord}>Random Word</button>
+                <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="10"/>
+                </span>
+            </div> 
+            <div>
+                <span>
                     <button onClick={createUserWord}>User Selected</button>
                     <input type="text" ref={userWordRef}></input><span ref={errMsgRef}>{errMsg}</span>
                 </span>
@@ -125,7 +166,12 @@ function GameModeDisplay(){
                 {processedWordArr}
             </div>
             <div>
-                <LetterInputDisplay userWord={userWord} handleUserInput={handleUserInput} guessedLetters={guessedLetters} count={count} userInput={userInput} hasWon={hasWon} />
+                <LetterInputDisplay word={word} handleUserInput={handleUserInput} 
+                guessedLetters={guessedLetters} userInput={userInput} 
+                hasWon={hasWon} hasLost={hasLost} />
+            </div>
+            <div>
+                {won_lossMsg()}
             </div>
             <div>
                 <HangmanStickfigure count={count}/>
