@@ -2,6 +2,19 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
 //TO-DO 
+    /*
+    1. Hyphen validation: **DONE**
+    2. Word length validation: **DONE**
+    3. Input sanitization: **DONE**
+    4. Case insensitivity: **DONE**
+    5. Prevent duplicate guesses: disable wrong guesses with color red, green for correct guesses
+    6. Handle API errors: You're catching API errors and alerting the user. 
+        You might want to consider displaying a more user-friendly error message or retrying the API call.
+    7. Validate API response: You're assuming that the API response will always be 
+        an array with at least one element. You might want to add some error checking 
+        to handle cases where the API response is not what you expect.
+    */
+
     //Return to initial state after GameOver/GameWon screen
     //Persistence before GameWon/GameOver screen (userWord, wordArr, count, guessedLetters, visibilityArr)
     //Restart button to replace the refresh button that clears out the sessionStorage.
@@ -26,20 +39,23 @@ function GameModeDisplay(){
         function hasOnlyLettersAndHyphen(word){
             return /^[a-zA-Z-]+$/.test(word)
         }
-        if(userWord.length<1){
-            setErrMsg2("Word must contain at least one letter.")
+        if(userWord.length<2||userWord.length>17){
+            setErrMsg2("Word must be between two(2) and seventeen(17) characters.")
         }else if(userWord.includes("--")){
             setErrMsg2("Word cannot contain two consecutive hyphens.")
-        }else if (userWord.startsWith("-")||userWord.endsWith("-")){
+        }else if (userWord.includes(" ")){
+            setErrMsg2("Word cannot contain spaces.")
+        }else if(userWord.startsWith("-")||userWord.endsWith("-")){
             setErrMsg2("Word cannot begin or end with an hyphen.")
-        }else if (hasOnlyLetters(userWord)||hasOnlyLettersAndHyphen(userWord)){
+        }else if(!hasOnlyLettersAndHyphen(userWord)){
+            setErrMsg2("Word can only contain letters and no more than one hyphen.")
+        }else if(hasOnlyLettersAndHyphen(userWord)){
             setUserWord(userWord);
+            setWord(userWord.toUpperCase());
             setIsDisabled(true)
-        }else{
-            setErrMsg2("Word must contain letters and can contain one hyphen.")
         }
         userWordRef.current.value="";
-        setWord(userWord.toUpperCase());
+       
         return userWord;
     }
     //console.log(`userWord is set to ${userWord}`);
