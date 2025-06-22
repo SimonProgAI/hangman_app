@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
+import './components.css';
 //TO-DO 
     //add a dictionary api to include meaning of the word on either haswon or haslost.
     //Render keyboard input dynamically (.map() or somethine else)
     //a message that tells the user to turn around while inputing user word
 function GameModeDisplay(){
+
 //VARIABLES
     const userWordRef = useRef();
     const errMsgRef2 = useRef();
@@ -46,6 +48,8 @@ function GameModeDisplay(){
             setWord(userWord.toUpperCase());
             setIsDisabled(true)
             setGuessedLettersArr([...guessedLettersArr, "-"]);
+            setErrMsg1("");
+            setErrMsg2("");
         }
         userWordRef.current.value="";
         return userWord;
@@ -71,6 +75,8 @@ function GameModeDisplay(){
                     const randomWord = data[0];
                     setRandomWord(randomWord);
                     setWord(randomWord.toUpperCase());
+                    setErrMsg1("");
+                    setErrMsg2("");
                 })
                 .catch((error)=>alert('Error fetching data:', error));
         }

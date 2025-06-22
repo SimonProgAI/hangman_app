@@ -1,3 +1,4 @@
+import './components.css';
 const LetterInputDisplay = ({word, handleUserInput, wrongGuessesArr, guessedLettersArr, hasWon, hasLost}) => {
     
     const btnRows= [
@@ -36,7 +37,7 @@ const LetterInputDisplay = ({word, handleUserInput, wrongGuessesArr, guessedLett
 
     ];
 
-    let colorOfBtn;
+    let letterColor;
     
     const btnInput = btnRows.map((rowArr, index)=>{
         
@@ -46,19 +47,19 @@ const LetterInputDisplay = ({word, handleUserInput, wrongGuessesArr, guessedLett
                 if (word===""||hasLost===true||hasWon===true){
                     return true;
                 }else if (wrongGuessesArr.includes(btn.letter)){
-                    colorOfBtn = {color: 'red'};
+                    letterColor = {color: 'red'};
                     return true;
                 }else if(guessedLettersArr.includes(btn.letter)){
-                    colorOfBtn = {color: 'green'};
+                    letterColor = {color: 'green'};
                     return true;
                 }else{
-                    colorOfBtn = {color: 'black'};
+                    letterColor = {color: 'black'};
                     return guessedLettersArr.includes(btn.letter);
                 }
             }
             return(
-                <span key={btn.id}>
-                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={keyboardStatus()} style={colorOfBtn}>{btn.letter}</button>
+                <span key={btn.id} className='btn_row'>
+                    <button onClick={()=>handleUserInput(btn.letter)}  disabled={keyboardStatus()} style={letterColor} className='indv_btns'>{btn.letter}</button>
                 </span>
             )
             })
