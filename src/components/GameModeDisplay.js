@@ -2,40 +2,34 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
 //TO-DO 
-    /*
-    1. Hyphen validation: **DONE**
-    2. Word length validation: **DONE**
-    3. Input sanitization: **DONE**
-    4. Case insensitivity: **DONE**
-    5. Prevent duplicate guesses: disable wrong guesses with color red, green for correct guesses
-    6. Handle API errors: You're catching API errors and alerting the user. 
-        You might want to consider displaying a more user-friendly error message or retrying the API call.
-    7. Validate API response: You're assuming that the API response will always be 
-        an array with at least one element. You might want to add some error checking 
-        to handle cases where the API response is not what you expect.
-    */
-
-    //Return to initial state after GameOver/GameWon screen
-    //Persistence before GameWon/GameOver screen (userWord, wordArr, count, guessedLetters, visibilityArr)
-    //Restart button to replace the refresh button that clears out the sessionStorage.
+    //add a dictionary api to include meaning of the word on either haswon or haslost.
+    //Render keyboard input dynamically (.map() or somethine else)
+    //a message that tells the user to turn around while inputing user word
+    //trim console.logs
     //HangmanStickfigure should not show traces of white limbs over black limbs
 
 function GameModeDisplay(){
-//USER_CREATED_WORD 
+//VARIABLES
     const userWordRef = useRef();
     const errMsgRef2 = useRef();
     const [userWord, setUserWord] = useState("");
     const [errMsg2, setErrMsg2] = useState("");
     const [word, setWord] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
-    
+    const [randomWord, setRandomWord] = useState("");
+    const randomWordLengthRef = useRef();
+    const [errMsg1, setErrMsg1] = useState("");
+    const errMsgRef1 = useRef();
+    const [userInput, setUserInput] = useState("");
+    const [count, setCount] = useState(0);
+    const [guessedLettersArr, setGuessedLettersArr] = useState([]);
+    const [wrongGuessesArr, setWrongGuessesArr] = useState([]);
+    const [visibilityArr, setVisibilityArr] = useState([]);
+
+//USER_CREATED_WORD 
     const createUserWord = ()=>{ 
         //console.log(`function createUserWord called`);
         const userWord = userWordRef.current.value;
-        
-        function hasOnlyLetters(word){
-            return /^[a-zA-Z]+$/.test(word)
-        }
         function hasOnlyLettersAndHyphen(word){
             return /^[a-zA-Z-]+$/.test(word)
         }
@@ -55,17 +49,11 @@ function GameModeDisplay(){
             setIsDisabled(true)
         }
         userWordRef.current.value="";
-       
         return userWord;
     }
     //console.log(`userWord is set to ${userWord}`);
     
 //RANDOM_WORD_API
-    const [randomWord, setRandomWord] = useState("");
-    const randomWordLengthRef = useRef();
-    const [errMsg1, setErrMsg1] = useState("");
-    const errMsgRef1 = useRef();
-
     const handleRandomWord = () => {
         const randomWordLength = Number(randomWordLengthRef.current.value);
         if(randomWordLength<2||randomWordLength>16){
@@ -73,51 +61,54 @@ function GameModeDisplay(){
         }else if (randomWordLength>1&&randomWordLength<17){
             setIsDisabled(true);
             const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
-            const errorAlert = 'Something went wrong while fetching your request. Please try again.';
             fetch(url)
-                .then(response => response.json())
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error(`HTTP error! status: ${response.status}`)
+                    }
+                    return response.json()
+                })
                 .then(data => {
                     const randomWord = data[0];
                     setRandomWord(randomWord);
                     setWord(randomWord.toUpperCase());
                 })
-                .catch((error)=>alert(errorAlert));
+                .catch((error)=>alert('Error fetching data:', error));
         }
         //console.log('function handleRandomWord called')
     }
     //console.log(`randomWord is set to ${randomWord}`);
 
 //WORDARR
-    let wordArr = useMemo(()=>word.split(''),[word]);
-    //console.log(`word set to ${word}`)
-    //console.log(wordArr);
+    let wordArr = useMemo(()=>{
+        if(!word){
+            return [];
+        }else if (word){
+            return word.split('')
+        };
+    },[word]);
+    //console.log('wordArr is', wordArr);
+
 //USER_INPUT    
-    const [userInput, setUserInput] = useState("");
-    const [count, setCount] = useState(0);
-    const [guessedLetters, setGuessedLetters] = useState([]);
-    
     const handleUserInput = (letter, index) => {
-        
         setUserInput(letter);
         const upperCaseLetters = letter.toUpperCase()
-       
         if(wordArr.includes(upperCaseLetters)===false){
             setCount(count+1);
+            setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
         }else if(wordArr.includes(upperCaseLetters)===true){
-             setGuessedLetters([...guessedLetters, upperCaseLetters]) 
+            setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]) 
         } 
-        //console.log(`guessedLetters: ${guessedLetters}`)
-        //console.log(`count is ${count+1}`); //count+1 is a workaround solution, maybe rework later
-        //console.log(`function handleUserInput called`);
+        //console.log('guessedLetters:', guessedLetters)
+        //console.log(`count is ${count+1}`);
         //console.log(`userInput: ${letter}`);
     }
- 
 
-//SUCCESS/FAILURE
-    const hasWon = wordArr.every(letter => guessedLetters.includes(letter)) ? true: false;
+//HASWON/HASLOST
+    const hasWon = wordArr.every(letter => guessedLettersArr.includes(letter)) ? true: false;
     const hasLost = count===6 ? true: false;
     const won_lossMsg = () => {
-        if (hasWon===true&&guessedLetters.length!==0){
+        if (hasWon===true&&guessedLettersArr.length!==0){
             return(
                 <div>Success!</div>
             )
@@ -127,15 +118,12 @@ function GameModeDisplay(){
             )
         }
     }
-  
-//WORD_DISPLAY
-    
-    const [visibilityArr, setVisibilityArr] = useState([]);
 
+//WORD_DISPLAY
     useEffect(()=>{
         let tempVisibilityArr = [];
         wordArr.forEach((letter, index) => {
-            if(guessedLetters.includes(letter)){
+            if(guessedLettersArr.includes(letter)){
                 //console.log(`Letter ${letter} at index ${index} is revealed`);
                 tempVisibilityArr.push(true)
             }else{
@@ -145,26 +133,82 @@ function GameModeDisplay(){
         });
         setVisibilityArr(tempVisibilityArr);
     },[wordArr, userInput]);
-    
-    //console.log(`visibilityArr:${visibilityArr}`);
+    //console.log('visibilityArr:', visibilityArr);
     
     let processedWordArr = wordArr.map((letter,index)=>{
         
         if(wordArr.length!==visibilityArr.length){
-            //console.log('Error, visibilityArr.length and wordArr.length do not match')
+            console.log('Error, visibilityArr.length and wordArr.length do not match')
         }
-        if (visibilityArr[index]===true){
+        if (visibilityArr[index]===true||letter==='-'){
             //console.log(`${letter} should be revealed`)
-            return <span style={{visibility: 'visible'}}>{letter}</span> 
+            return <span key={index} style={{visibility: 'visible'}}>{letter}</span> 
         }
         if (visibilityArr[index]===false){
             //console.log(`${letter} should be hidden`)
-            return <span style={{visibility: 'hidden'}}>{letter}</span>
+            return <span key={index} style={{visibility: 'hidden'}}>{letter}</span>
         }
     });
 
+//SESSION_STORAGE
+    useEffect(()=>{
+        if(word && word.length>0){
+            const gameState = {word, isDisabled, count, guessedLettersArr, wrongGuessesArr, visibilityArr}; 
+            sessionStorage.setItem('gameState', JSON.stringify(gameState));
+            //console.logs
+                /*console.log('sessionStorage on first load:', sessionStorage)
+                console.log('gameState.word is', gameState.word);
+                console.log('gameState.isDisabled is', gameState.isDisabled);
+                console.log('gameState.count is', gameState.count);
+                console.log('gameState.guessedLettersArr is', gameState.guessedLettersArr);
+                console.log('gameState.wrongGuessesArr is', gameState.wrongGuessesArr);
+                console.log('gameState.visibilityArr is', gameState.visibilityArr);*/
+            
+        }
+    },[word, isDisabled, count, guessedLettersArr, wrongGuessesArr])
+
+    useEffect(()=>{
+        const storedGameState = sessionStorage.getItem('gameState');
+        
+        if(storedGameState!==null){
+            const gameState = JSON.parse(storedGameState);
+            
+            setWord(gameState.word);
+            setIsDisabled(gameState.isDisabled);
+            setCount(gameState.count);
+            setGuessedLettersArr(gameState.guessedLettersArr);
+            setWrongGuessesArr(gameState.wrongGuessesArr);
+            setVisibilityArr(gameState.visibilityArr);
+            //console.logs
+               /*console.log('retrieved word is', gameState.word);
+                console.log('retrieved isDisabled is', gameState.isDisabled);
+                console.log('retrieved count is', gameState.count);
+                console.log('retrieved guessedLettersArr is', gameState.guessedLettersArr);
+                console.log('retrieved wrongGuessesArr is', gameState.wrongGuessesArr);
+                console.log('retrieved visibilityArr is', gameState.visibilityArr);
+                console.log('sessionStorage on page reload:', sessionStorage);
+                console.log('storedGameState on page reload:',storedGameState);
+                */
+        }
+    },[])
+    
+    const handleRestart = () => {//all variable in sessionStorage must reinitialize
+        sessionStorage.clear();
+        setWord("");
+        setIsDisabled(false);
+        setCount(0);
+        setGuessedLettersArr([]);
+        setWrongGuessesArr([]);
+        setVisibilityArr([]);
+        //console.log(sessionStorage)
+    }
+
+//FINAL_RENDER
     return(
         <div>
+            <div>
+                <button onClick={handleRestart} >Reset Game</button>
+            </div>
             <div>
                 <span>
                 <button onClick={handleRandomWord} disabled={isDisabled}>Random Word</button>
@@ -181,8 +225,8 @@ function GameModeDisplay(){
                 {processedWordArr}
             </div>
             <div>
-                <LetterInputDisplay word={word} handleUserInput={handleUserInput} 
-                guessedLetters={guessedLetters} userInput={userInput} 
+                <LetterInputDisplay word={word} handleUserInput={handleUserInput} wrongGuessesArr={wrongGuessesArr} 
+                guessedLettersArr={guessedLettersArr} userInput={userInput} 
                 hasWon={hasWon} hasLost={hasLost} />
             </div>
             <div>
@@ -194,6 +238,5 @@ function GameModeDisplay(){
         </div>
     )
 };
-
 
 export default GameModeDisplay;

@@ -7,10 +7,9 @@ const HangmanStickfigure = ({count}) => {
     const leftLegColor = count>4 ? 'black': 'white';
     const rightLegColor = count>5 ? 'black': 'white';
 
-    //Look into clipping or similar techniques to hide the white holes in the torso.
     return (
         <div>
-            <svg width="300" height="300" >
+            <svg width="300" height="300" > 
                 <circle cx="140" cy="80" r="20" style={{fill: headColor}}/>
                 <line x1="140" y1="150" x2="140" y2="98"  style={{stroke: torsoColor, strokeWidth: '8', strokeLinecap: 'round'}}/>
                 <line x1="140" y1="110" x2="105" y2="130" style={{stroke: leftArmColor, strokeWidth: '6', strokeLinecap: 'round'}}/>
