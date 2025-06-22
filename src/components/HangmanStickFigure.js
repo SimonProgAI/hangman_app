@@ -1,11 +1,11 @@
 const HangmanStickfigure = ({count}) => {
     
-    const headColor = count>0 ? 'black': 'white';
-    const torsoColor = count>1 ? 'black': 'white';
-    const leftArmColor = count>2 ? 'black': 'white';
-    const rightArmColor = count>3 ? 'black': 'white';
-    const leftLegColor = count>4 ? 'black': 'white';
-    const rightLegColor = count>5 ? 'black': 'white';
+    const headColor = count>0 ? 'black': 'transparent';
+    const torsoColor = count>1 ? 'black': 'transparent';
+    const leftArmColor = count>2 ? 'black': 'transparent';
+    const rightArmColor = count>3 ? 'black': 'transparent';
+    const leftLegColor = count>4 ? 'black': 'transparent';
+    const rightLegColor = count>5 ? 'black': 'transparent';
 
     return (
         <div>

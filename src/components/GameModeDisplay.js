@@ -5,9 +5,6 @@ import HangmanStickfigure from "./HangmanStickFigure";
     //add a dictionary api to include meaning of the word on either haswon or haslost.
     //Render keyboard input dynamically (.map() or somethine else)
     //a message that tells the user to turn around while inputing user word
-    //trim console.logs
-    //HangmanStickfigure should not show traces of white limbs over black limbs
-
 function GameModeDisplay(){
 //VARIABLES
     const userWordRef = useRef();
@@ -28,11 +25,12 @@ function GameModeDisplay(){
 
 //USER_CREATED_WORD 
     const createUserWord = ()=>{ 
-        //console.log(`function createUserWord called`);
+
         const userWord = userWordRef.current.value;
         function hasOnlyLettersAndHyphen(word){
             return /^[a-zA-Z-]+$/.test(word)
         }
+
         if(userWord.length<2||userWord.length>17){
             setErrMsg2("Word must be between two(2) and seventeen(17) characters.")
         }else if(userWord.includes("--")){
@@ -47,6 +45,7 @@ function GameModeDisplay(){
             setUserWord(userWord);
             setWord(userWord.toUpperCase());
             setIsDisabled(true)
+            setGuessedLettersArr([...guessedLettersArr, "-"]);
         }
         userWordRef.current.value="";
         return userWord;
@@ -84,22 +83,23 @@ function GameModeDisplay(){
         if(!word){
             return [];
         }else if (word){
-            return word.split('')
+            return word.split('');
         };
     },[word]);
-    //console.log('wordArr is', wordArr);
+    console.log('wordArr is', wordArr);
 
 //USER_INPUT    
     const handleUserInput = (letter, index) => {
         setUserInput(letter);
-        const upperCaseLetters = letter.toUpperCase()
+        const upperCaseLetters = letter.toUpperCase();
+        
         if(wordArr.includes(upperCaseLetters)===false){
             setCount(count+1);
             setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
         }else if(wordArr.includes(upperCaseLetters)===true){
             setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]) 
-        } 
-        //console.log('guessedLetters:', guessedLetters)
+        }
+        //console.log('guessedLettersArr:', guessedLettersArr)
         //console.log(`count is ${count+1}`);
         //console.log(`userInput: ${letter}`);
     }
@@ -191,8 +191,9 @@ function GameModeDisplay(){
                 */
         }
     },[])
-    
-    const handleRestart = () => {//all variable in sessionStorage must reinitialize
+
+//RESET_GAME
+    const handleRestart = () => {
         sessionStorage.clear();
         setWord("");
         setIsDisabled(false);
@@ -203,11 +204,11 @@ function GameModeDisplay(){
         //console.log(sessionStorage)
     }
 
-//FINAL_RENDER
+//FINAL_RENDERER
     return(
         <div>
             <div>
-                <button onClick={handleRestart} >Reset Game</button>
+                <button onClick={handleRestart}>Reset Game</button>
             </div>
             <div>
                 <span>
