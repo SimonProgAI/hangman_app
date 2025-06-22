@@ -4,7 +4,7 @@ function App() {
 
   return(
     <div>
-        <GameModeDisplay/>
+      <GameModeDisplay/>
     </div>
   );
 
