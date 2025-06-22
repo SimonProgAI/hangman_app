@@ -58,21 +58,21 @@ const LetterInputDisplay = ({word, handleUserInput, wrongGuessesArr, guessedLett
                 }
             }
             return(
-                <span key={btn.id} className='btn_row'>
+                <span key={btn.id} className='btnRow_span'>
                     <button onClick={()=>handleUserInput(btn.letter)}  disabled={keyboardStatus()} style={letterColor} className='indv_btns'>{btn.letter}</button>
                 </span>
             )
             })
         
         return(
-            <div key={index}>
+            <div key={index} className='btnRows_div'>
                 {btnRows1_3}
             </div>
         )
     });
 
     return(
-            <div>
+            <div className="btnInput_div">
                 {btnInput}
             </div>
     );

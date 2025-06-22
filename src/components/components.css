@@ -1,11 +1,63 @@
-.gallow_background{
-  
-}
+/*GameModeDisplay*/
+    .pageRenderer_div{
+        
+    }
+    .resetGame_btn_div{
+        
+    }
+    .resetGame_btn{
+        
+    }
+    .randomWord_div{
 
-.indv_btns{
-    
-}
+    }
+    .gameMode_btn{
 
-.btn_row{
+    }
+    .numOfLetters_input{
+
+    }
+    .userWord_div{
+
+    }
+    .userWord_input{
+
+    }
+    .errMsg{
+
+    }
+    .processedWordArr_div{
+
+    }
+    .letterInputDisplay_div{
+
+    }
+    .won_lossMsg_div{
+
+    }
+    .hasWon_msg{
+
+    }
+    .hasLost_msg{
+        
+    }
+    .hangmanStickFigure_div{
+
+    }
+/*LetterInputDisplay*/
+    .btnInput_div{
+
+    }
+    .btnRows_div{
+
+    }
+    .btnRow_span{
+        
+    }
+    .indv_btns{
+        
+    }
+/*HangmanStickFigure*/
+    .gallowBackground_div{
     
-}
+    }

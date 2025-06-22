@@ -9,7 +9,7 @@ const HangmanStickfigure = ({count}) => {
     const rightLegColor = count>5 ? 'black': 'transparent';
 
     return (
-        <div className='gallow_background'>
+        <div className='gallowBackground_div'>
             <svg width="300" height="300" > 
                 <circle cx="140" cy="80" r="20" style={{fill: headColor}}/>
                 <line x1="140" y1="150" x2="140" y2="98"  style={{stroke: torsoColor, strokeWidth: '8', strokeLinecap: 'round'}}/>

@@ -27,12 +27,10 @@ function GameModeDisplay(){
 
 //USER_CREATED_WORD 
     const createUserWord = ()=>{ 
-
         const userWord = userWordRef.current.value;
         function hasOnlyLettersAndHyphen(word){
             return /^[a-zA-Z-]+$/.test(word)
         }
-
         if(userWord.length<2||userWord.length>17){
             setErrMsg2("Word must be between two(2) and seventeen(17) characters.")
         }else if(userWord.includes("--")){
@@ -42,7 +40,7 @@ function GameModeDisplay(){
         }else if(userWord.startsWith("-")||userWord.endsWith("-")){
             setErrMsg2("Word cannot begin or end with an hyphen.")
         }else if(!hasOnlyLettersAndHyphen(userWord)){
-            setErrMsg2("Word can only contain letters and no more than one hyphen.")
+            setErrMsg2("Word must contain letters and no more than one hyphen.")
         }else if(hasOnlyLettersAndHyphen(userWord)){
             setUserWord(userWord);
             setWord(userWord.toUpperCase());
@@ -92,17 +90,17 @@ function GameModeDisplay(){
             return word.split('');
         };
     },[word]);
-    console.log('wordArr is', wordArr);
+    //console.log('wordArr is', wordArr);
 
 //USER_INPUT    
     const handleUserInput = (letter, index) => {
         setUserInput(letter);
         const upperCaseLetters = letter.toUpperCase();
         
-        if(wordArr.includes(upperCaseLetters)===false){
+        if(!wordArr.includes(upperCaseLetters)){
             setCount(count+1);
             setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
-        }else if(wordArr.includes(upperCaseLetters)===true){
+        }else if(wordArr.includes(upperCaseLetters)){
             setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]) 
         }
         //console.log('guessedLettersArr:', guessedLettersArr)
@@ -116,11 +114,11 @@ function GameModeDisplay(){
     const won_lossMsg = () => {
         if (hasWon===true&&guessedLettersArr.length!==0){
             return(
-                <div>Success!</div>
+                <div className="hasWon_msg">Success!</div>
             )
         }else if (hasLost===true){
             return(
-                <div>Wrong! The word was "{wordArr.join("")}"</div>
+                <div className="hasLost_msg" >Wrong! The word was "{wordArr.join("")}".</div>
             )
         }
     }
@@ -146,11 +144,11 @@ function GameModeDisplay(){
         if(wordArr.length!==visibilityArr.length){
             console.log('Error, visibilityArr.length and wordArr.length do not match')
         }
-        if (visibilityArr[index]===true||letter==='-'){
+        if (visibilityArr[index]||letter==='-'){
             //console.log(`${letter} should be revealed`)
             return <span key={index} style={{visibility: 'visible'}}>{letter}</span> 
         }
-        if (visibilityArr[index]===false){
+        if (!visibilityArr[index]){
             //console.log(`${letter} should be hidden`)
             return <span key={index} style={{visibility: 'hidden'}}>{letter}</span>
         }
@@ -212,34 +210,37 @@ function GameModeDisplay(){
 
 //FINAL_RENDERER
     return(
-        <div>
-            <div>
-                <button onClick={handleRestart}>Reset Game</button>
+        <div className="pageRenderer_div">
+            <div className="resetGame_btn_div">
+                <button onClick={handleRestart} className="resetGame_btn">Reset Game</button>
             </div>
-            <div>
+            <div className="randomWord_div">
                 <span>
-                <button onClick={handleRandomWord} disabled={isDisabled}>Random Word</button>
-                <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" disabled={isDisabled}/><span ref={errMsgRef1}>{errMsg1}</span>
+                    <button onClick={handleRandomWord} disabled={isDisabled} className="gameMode_btn">Random Word</button>
+                    <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" 
+                        disabled={isDisabled} className="numOfLetters_input"/>
+                    <span ref={errMsgRef1} className="errMsg">{errMsg1}</span>
                 </span>
             </div> 
-            <div>
+            <div className="userWord_div">
                 <span>
-                    <button onClick={createUserWord} disabled={isDisabled}>User Selected</button>
-                    <input type="text" ref={userWordRef} disabled={isDisabled}></input><span ref={errMsgRef2}>{errMsg2}</span>
+                    <button onClick={createUserWord} disabled={isDisabled} className="gameMode_btn">User Selected</button>
+                    <input type="text" ref={userWordRef} disabled={isDisabled} className="userWord_input"></input>
+                    <span ref={errMsgRef2} className="errMsg">{errMsg2}</span>
                 </span>
             </div>
-            <div>
+            <div className="processedWordArr_div">
                 {processedWordArr}
             </div>
-            <div>
+            <div className="letterInputDisplay_div">
                 <LetterInputDisplay word={word} handleUserInput={handleUserInput} wrongGuessesArr={wrongGuessesArr} 
                 guessedLettersArr={guessedLettersArr} userInput={userInput} 
                 hasWon={hasWon} hasLost={hasLost} />
             </div>
-            <div>
+            <div className="won_lossMsg_div">
                 {won_lossMsg()}
             </div>
-            <div>
+            <div className="hangmanStickFigure_div">
                 <HangmanStickfigure count={count}/>
             </div>
         </div>
