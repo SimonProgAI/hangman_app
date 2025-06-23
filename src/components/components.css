@@ -1,63 +1,142 @@
 /*GameModeDisplay*/
     .pageRenderer_div{
-        
+
     }
+    .button_container{
+        display:grid;
+        grid-template-areas: 
+            "random restart"
+            "user restart";
+        grid-template-columns: 2.4fr 1fr;
+        align-items: center;
+        column-gap: 0.2em;
+        border: solid;
+        width:40em;
+}
+
     .resetGame_btn_div{
-        
-    }
+        grid-area: restart;
+        align-self: top;
+}
     .resetGame_btn{
-        
+        width:9em;
+        height:4em;
+        font-size: 1.3em;
     }
     .randomWord_div{
-
+        grid-area: random;
+        align-self: center;
     }
     .gameMode_btn{
-
+        width:9em;
+        height:2em;
+        font-size: 1.3em;
     }
     .numOfLetters_input{
-
+        width:3.8em;
+        height:1.7em;
+        font-size: 1.3em;
     }
     .userWord_div{
-
-    }
-    .userWord_input{
-
-    }
-    .errMsg{
-
-    }
-    .processedWordArr_div{
-
-    }
-    .letterInputDisplay_div{
-
-    }
-    .won_lossMsg_div{
-
-    }
-    .hasWon_msg{
-
-    }
-    .hasLost_msg{
+        grid-area: user;
+        align-self: center;
         
     }
-    .hangmanStickFigure_div{
+    .userWord_input{
+        width:9em;
+        height:1.7em;
+        font-size: 1.3em;
+    }
+    .errMsg{
+        color: crimson;
+    }
+    .processedWordArr_div{
+        /*border: solid;*/
+        text-align: center;
+        margin: 2em;
 
     }
+    .letter_display{
+        border-bottom: solid rgb(0, 0, 0);
+        border-bottom-width: 0.2em ;
+        width: 3em;
+        text-align: center;
+        display:inline-block;
+        margin: 0.2em;
+        user-select: none;
+        font-size: 2.5em ;
+    }
+    #hidden_letter{
+        color: transparent;
+        user-select: none;
+    }
+    
+    .won_lossMsg_div>div{
+        /*border: solid;*/
+        text-align: center;
+        margin: 0.3em;
+        padding-bottom: 0.2em;
+        font-size: 3em;
+        padding: 0.1em;
+        border-radius: 1em; 
+    }
+    .hasWon_msg{
+        background-color:chartreuse;
+        
+    }
+    .hasLost_msg{
+        background-color: crimson;
+        
+    }
+    .letterInputDisplay_div{
+       
+        
+    }
+    
+    .hangmanStickFigure_div{
+        width: 30em;  
+        height: 20em;
+        text-align: center;
+    }
+    .bottom_container{
+        display:flex;
+        justify-content:space-around;
+        align-items: center;
+    }
+    #footer{
+        text-align: center;
+        font-weight: 600;
+        padding:3em;
+    }
+    .footer_icon{
+        padding: 0.3em;
+    }
+
 /*LetterInputDisplay*/
     .btnInput_div{
-
+        margin: 0.5em;
+        border: solid 0.5em;
+        border-radius: 1em;
+        background-color: rgb(59, 163, 233);
+        text-align: center;
+        
     }
     .btnRows_div{
-
+        margin:0.5em;
     }
     .btnRow_span{
         
     }
     .indv_btns{
-        
+        width:1.8em;
+        height:1.8em;
+        font-size: 2em;
     }
 /*HangmanStickFigure*/
     .gallowBackground_div{
-    
+        border: solid 0.5em;
+        border-radius: 1em;
+        background-color:rgb(79, 168, 196);
+
+        
     }

@@ -58,7 +58,7 @@ function GameModeDisplay(){
     const handleRandomWord = () => {
         const randomWordLength = Number(randomWordLengthRef.current.value);
         if(randomWordLength<2||randomWordLength>16){
-            setErrMsg1("The word must contain between 2 and 16 characters.")
+            setErrMsg1("Select between 2 and 16 characters.")
         }else if (randomWordLength>1&&randomWordLength<17){
             setIsDisabled(true);
             const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
@@ -114,7 +114,7 @@ function GameModeDisplay(){
     const won_lossMsg = () => {
         if (hasWon===true&&guessedLettersArr.length!==0){
             return(
-                <div className="hasWon_msg">Success!</div>
+                <div className="hasWon_msg">Correct!</div>
             )
         }else if (hasLost===true){
             return(
@@ -146,11 +146,11 @@ function GameModeDisplay(){
         }
         if (visibilityArr[index]||letter==='-'){
             //console.log(`${letter} should be revealed`)
-            return <span key={index} style={{visibility: 'visible'}}>{letter}</span> 
+            return <span key={index} className="letter_display">{letter}</span> 
         }
         if (!visibilityArr[index]){
             //console.log(`${letter} should be hidden`)
-            return <span key={index} style={{visibility: 'hidden'}}>{letter}</span>
+            return <span key={index} className="letter_display" id="hidden_letter">{letter}</span>
         }
     });
 
@@ -205,43 +205,59 @@ function GameModeDisplay(){
         setGuessedLettersArr([]);
         setWrongGuessesArr([]);
         setVisibilityArr([]);
+        setErrMsg1("");
+        setErrMsg2("");
+        randomWordLengthRef.current.value = "";
         //console.log(sessionStorage)
     }
 
 //FINAL_RENDERER
     return(
         <div className="pageRenderer_div">
-            <div className="resetGame_btn_div">
-                <button onClick={handleRestart} className="resetGame_btn">Reset Game</button>
-            </div>
-            <div className="randomWord_div">
-                <span>
+            <div className="button_container">
+                <div className="randomWord_div">  
                     <button onClick={handleRandomWord} disabled={isDisabled} className="gameMode_btn">Random Word</button>
                     <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" 
                         disabled={isDisabled} className="numOfLetters_input"/>
                     <span ref={errMsgRef1} className="errMsg">{errMsg1}</span>
-                </span>
-            </div> 
-            <div className="userWord_div">
-                <span>
+                </div> 
+                <div className="userWord_div">
+                    <span>
                     <button onClick={createUserWord} disabled={isDisabled} className="gameMode_btn">User Selected</button>
                     <input type="text" ref={userWordRef} disabled={isDisabled} className="userWord_input"></input>
+                    </span>
                     <span ref={errMsgRef2} className="errMsg">{errMsg2}</span>
-                </span>
+                    
+                </div>
+                <div className="resetGame_btn_div">
+                    <button onClick={handleRestart} className="resetGame_btn">Reset Game</button>
+                </div>
             </div>
-            <div className="processedWordArr_div">
-                {processedWordArr}
+            <div className="middle_container"> 
+                <div className="processedWordArr_div">
+                    {processedWordArr}
+                </div>
+                <div className="won_lossMsg_div">
+                    {won_lossMsg()}
+                </div>
             </div>
-            <div className="letterInputDisplay_div">
-                <LetterInputDisplay word={word} handleUserInput={handleUserInput} wrongGuessesArr={wrongGuessesArr} 
-                guessedLettersArr={guessedLettersArr} userInput={userInput} 
-                hasWon={hasWon} hasLost={hasLost} />
+            <div className="bottom_container">
+                <div className="letterInputDisplay_div">
+                    <LetterInputDisplay word={word} handleUserInput={handleUserInput} wrongGuessesArr={wrongGuessesArr} 
+                    guessedLettersArr={guessedLettersArr} userInput={userInput} 
+                    hasWon={hasWon} hasLost={hasLost} />
+                </div>
+                <div className="hangmanStickFigure_div">
+                    <HangmanStickfigure count={count}/>
+                </div>
             </div>
-            <div className="won_lossMsg_div">
-                {won_lossMsg()}
-            </div>
-            <div className="hangmanStickFigure_div">
-                <HangmanStickfigure count={count}/>
+            <div>
+                <footer id="footer">
+                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src="/github-mark.svg" height="45" width="45" className="footer_icon"></img></a>
+                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="/LinkedIn_icon.svg" height="45" width="45" className="footer_icon"></img></a>
+                    <a href="mailto:lupiensimon@hotmail.com"><img src="/envelope-svgrepo-com.svg" height="45" width="45" className="footer_icon"></img></a>
+                    <h3>©2025 Simon Lupien</h3>
+                </footer>
             </div>
         </div>
     )
