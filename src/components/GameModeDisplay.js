@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
+import wrongInputSound1 from "C:/Workspace/hangman_app/src/components/audio/wrong-47985.mp3";
+import correctInputSound1 from "C:/Workspace/hangman_app/src/components/audio/soft-subtle-ui-pop-sfx-348820.mp3";
 import './components.css';
 //TO-DO 
     //add a dictionary api to include meaning of the word on either haswon or haslost.
@@ -9,6 +11,8 @@ import './components.css';
 function GameModeDisplay(){
 
 //VARIABLES
+    const pageTitleString = "Hangman";
+    const pageTitleArr = pageTitleString.split(''); 
     const userWordRef = useRef();
     const errMsgRef2 = useRef();
     const [userWord, setUserWord] = useState("");
@@ -24,6 +28,15 @@ function GameModeDisplay(){
     const [guessedLettersArr, setGuessedLettersArr] = useState([]);
     const [wrongGuessesArr, setWrongGuessesArr] = useState([]);
     const [visibilityArr, setVisibilityArr] = useState([]);
+    const wrongInputSound = new Audio(wrongInputSound1);
+    const correctInputSound = new Audio(correctInputSound1);
+
+//TITLE
+    const processedPageTitleArr = pageTitleArr.map((letter, index)=>{
+        return(
+            <span className="title" key={index}>{letter}</span>
+        )
+    })
 
 //USER_CREATED_WORD 
     const createUserWord = ()=>{ 
@@ -100,8 +113,11 @@ function GameModeDisplay(){
         if(!wordArr.includes(upperCaseLetters)){
             setCount(count+1);
             setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
+            wrongInputSound.play();
+
         }else if(wordArr.includes(upperCaseLetters)){
-            setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]) 
+            setGuessedLettersArr([...guessedLettersArr, upperCaseLetters])
+            correctInputSound.play(); 
         }
         //console.log('guessedLettersArr:', guessedLettersArr)
         //console.log(`count is ${count+1}`);
@@ -196,41 +212,47 @@ function GameModeDisplay(){
         }
     },[])
 
-//RESET_GAME
-    const handleRestart = () => {
-        sessionStorage.clear();
-        setWord("");
-        setIsDisabled(false);
-        setCount(0);
-        setGuessedLettersArr([]);
-        setWrongGuessesArr([]);
-        setVisibilityArr([]);
-        setErrMsg1("");
-        setErrMsg2("");
-        randomWordLengthRef.current.value = "";
-        //console.log(sessionStorage)
-    }
+    //RESET_GAME
+        const handleRestart = () => {
+            sessionStorage.clear();
+            setWord("");
+            setIsDisabled(false);
+            setCount(0);
+            setGuessedLettersArr([]);
+            setWrongGuessesArr([]);
+            setVisibilityArr([]);
+            setErrMsg1("");
+            setErrMsg2("");
+            randomWordLengthRef.current.value = "";
+            //console.log(sessionStorage)
+        }
 
 //FINAL_RENDERER
     return(
         <div className="pageRenderer_div">
-            <div className="button_container">
-                <div className="randomWord_div">  
-                    <button onClick={handleRandomWord} disabled={isDisabled} className="gameMode_btn">Random Word</button>
-                    <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" 
-                        disabled={isDisabled} className="numOfLetters_input"/>
-                    <span ref={errMsgRef1} className="errMsg">{errMsg1}</span>
-                </div> 
-                <div className="userWord_div">
-                    <span>
-                    <button onClick={createUserWord} disabled={isDisabled} className="gameMode_btn">User Selected</button>
-                    <input type="text" ref={userWordRef} disabled={isDisabled} className="userWord_input"></input>
-                    </span>
-                    <span ref={errMsgRef2} className="errMsg">{errMsg2}</span>
-                    
-                </div>
-                <div className="resetGame_btn_div">
-                    <button onClick={handleRestart} className="resetGame_btn">Reset Game</button>
+            
+            <div className="top_container">
+                <h1>{processedPageTitleArr}</h1>
+                <div className="button_container">
+                    <div className="randomWord_div">  
+                        <button onClick={handleRandomWord} disabled={isDisabled} className="randomWord_btn button">Random Word</button>
+                        <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" 
+                            disabled={isDisabled} className="numOfLetters_input"/>
+                        <br/>
+                        <span ref={errMsgRef1} className="errMsg">{errMsg1}</span>
+                    </div> 
+                    <div className="userWord_div">
+                        <span>
+                        <button onClick={createUserWord} disabled={isDisabled} className="userWord_btn button">User Selected</button>
+                        <input type="text" ref={userWordRef} disabled={isDisabled} placeholder="enter a word..."className="userWord_input"></input>
+                        </span>
+                        <br/>
+                        <span ref={errMsgRef2} className="errMsg">{errMsg2}</span>
+                        
+                    </div>
+                    <div className="resetGame_btn_div">
+                        <button onClick={handleRestart} className="resetGame_btn button">Reset Game</button>
+                    </div>
                 </div>
             </div>
             <div className="middle_container"> 

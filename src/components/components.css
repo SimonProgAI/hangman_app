@@ -1,6 +1,71 @@
-/*GameModeDisplay*/
-    .pageRenderer_div{
 
+.pageRenderer_div{
+    display: grid;
+    grid-template-areas: 
+    "top"
+    "mid"
+    "bottom"
+    "footer";
+    
+}
+/*ALL_CONTAINERS*/
+    .top_container{
+        grid-area: top;
+        
+    }
+    .title{
+        border-bottom: solid rgb(0, 0, 0);
+        border-bottom-width: 0.2em ;
+        width: 0.8em;
+        text-align: center;
+        display:inline-block;
+        margin: 0.2em;
+        padding:0.1em;
+        margin-bottom: 0.7em;
+        user-select: none;
+        font-size: 0.8em ;
+        font-family: cursive;
+    }
+    .top_container>h1{
+        text-align: center;
+        font-family: cursive;
+        font-size: 3em;
+        margin-bottom: -0.2em;
+        margin-top: 0.2em;
+           
+    }
+    .middle_container{
+        grid-area: mid;
+        border-style: groove;
+        border-radius: 1em;
+        min-height: 15em;
+        width: 50em;
+        margin: 2em;
+        justify-self: center;
+        background-color: white;
+    }
+    .bottom_container{
+        grid-area: bottom;
+        display:flex;
+        justify-content:space-around;
+        align-items: center;
+    }
+    #footer{
+    text-align: center;
+    font-weight: 600;
+    padding:3em;
+    grid-area: footer;
+}
+
+/*TOP_CONTAINER*/
+    .button{
+        color: black;
+        background-color: white;
+        border: 2px solid;
+        font-size: 1.3em;
+    }
+    .button:hover{
+        cursor: pointer;
     }
     .button_container{
         display:grid;
@@ -10,133 +75,176 @@
         grid-template-columns: 2.4fr 1fr;
         align-items: center;
         column-gap: 0.2em;
-        border: solid;
-        width:40em;
-}
-
-    .resetGame_btn_div{
-        grid-area: restart;
-        align-self: top;
-}
-    .resetGame_btn{
-        width:9em;
-        height:4em;
-        font-size: 1.3em;
-    }
-    .randomWord_div{
-        grid-area: random;
-        align-self: center;
-    }
-    .gameMode_btn{
-        width:9em;
-        height:2em;
-        font-size: 1.3em;
-    }
-    .numOfLetters_input{
-        width:3.8em;
-        height:1.7em;
-        font-size: 1.3em;
-    }
-    .userWord_div{
-        grid-area: user;
-        align-self: center;
-        
-    }
-    .userWord_input{
-        width:9em;
-        height:1.7em;
-        font-size: 1.3em;
+        border: solid 0.5em rgb(0, 0, 0);
+        border-radius: 1em;
+        width:45em;
+        justify-self: center;
+        margin-top: 1em;
+        padding:1em;
+        background-color: white;
     }
     .errMsg{
         color: crimson;
     }
-    .processedWordArr_div{
-        /*border: solid;*/
-        text-align: center;
-        margin: 2em;
+    
+    /*randomWord_div*/
+        .randomWord_div{
+            grid-area: random;
+            align-self: center;
+            padding: 0.2em
+        }
+        .randomWord_btn{
+            width:9em;
+            height:2em;
+            border-radius: 0.5em; 
+            border: 2px solid #04AA6D; 
+        }
+        .randomWord_btn:hover{
+            background-color:  #04AA6D;
+            color: white
+        }
+        .numOfLetters_input{
+            width:3.8em;
+            height:1.7em;
+            font-size: 1.3em;
+            
+        }
+    
+    /*userWord_div*/    
+        .userWord_div{
+            grid-area: user;
+            align-self: center;
+            padding: 0.2em
 
-    }
-    .letter_display{
-        border-bottom: solid rgb(0, 0, 0);
-        border-bottom-width: 0.2em ;
-        width: 3em;
-        text-align: center;
-        display:inline-block;
-        margin: 0.2em;
-        user-select: none;
-        font-size: 2.5em ;
-    }
-    #hidden_letter{
-        color: transparent;
-        user-select: none;
-    }
+        }
+        .userWord_btn{
+            width:9em;
+            height:2em;
+            border-radius: 0.5em; 
+            border: 2px solid #008CBA;
+        }
+        .userWord_btn:hover{
+            background-color: #008CBA;
+            color: white
+        }
+        .userWord_input{
+            width:9em;
+            height:1.7em;
+            font-size: 1.3em;
+        }
     
-    .won_lossMsg_div>div{
-        /*border: solid;*/
-        text-align: center;
-        margin: 0.3em;
-        padding-bottom: 0.2em;
-        font-size: 3em;
-        padding: 0.1em;
-        border-radius: 1em; 
-    }
-    .hasWon_msg{
-        background-color:chartreuse;
+    /*restGame_btn_div*/       
+        .resetGame_btn_div{
+            grid-area: restart;
+            align-self: top;
+        }
+        .resetGame_btn{
+            width:9em;
+            height:4em;
+            border-radius: 1em;
+            border: 2px solid #f44336;
+        }
+        .resetGame_btn:hover{
+            background-color: #f44336;
+            color: white;   
+        }
+/*MIDDLE_CONTAINER*/
+    /*processedWordArr_div*/
+        .processedWordArr_div{
+            text-align: center;
+            margin: 2em;
+            justify-self: center;
+        }
+        .letter_display{
+            border-bottom: solid rgb(0, 0, 0);
+            border-bottom-width: 0.2em ;
+            width: 2em;
+            text-align: center;
+            display:inline-block;
+            margin: 0.2em;
+            user-select: none;
+            font-size: 2em ;
+            font-family: cursive;
+        }
+        #hidden_letter{
+            color: transparent;
+            user-select: none;
+        }
+
+    /*won_lossMsg_div*/
+        .won_lossMsg_div>div{
+            /*border: solid;*/
+            text-align: center;
+            margin: 0.3em;
+            padding-bottom: 0.2em;
+            font-size: 2em;
+            padding: 0.1em;
+            border-radius: 1em;
+            width: 13em;
+            justify-self: center; 
+        }
+        .hasWon_msg{
+            background-color:#04AA6D;
+        }
+        .hasLost_msg{
+            background-color: #f44336;
+        }
+
+/*BOTTOM_CONTAINER*/
+    /*LetterInputDisplay*/
+        .btnInput_div{
+            margin: 0.5em;
+            border: solid 0.5em;
+            border-radius: 1em;
+            background-color: rgb(118, 199, 252);
+            text-align: center;
+            height: 19em;
+        }
+        .btnRows_div{
+            display: flex;
+            justify-content: center;
+            margin: 0.5em;
+            padding: 0.5em;
+        }
+        .btnRow_span{
+            
+        }
+        .indv_btns{
+            width:1.8em;
+            height:1.8em;
+            font-size: 2em;
+            margin:0.1em;
+            border-radius: 0.2em;
+        }
+        .indv_btns:hover{
+            cursor: pointer;
+            color:white !important;
+            background-color: #008CBA;
+        }
+        .letterInputDisplay_div{
         
-    }
-    .hasLost_msg{
-        background-color: crimson;
-        
-    }
-    .letterInputDisplay_div{
-       
-        
-    }
-    
-    .hangmanStickFigure_div{
-        width: 30em;  
-        height: 20em;
-        text-align: center;
-    }
-    .bottom_container{
-        display:flex;
-        justify-content:space-around;
-        align-items: center;
-    }
-    #footer{
-        text-align: center;
-        font-weight: 600;
-        padding:3em;
-    }
+            
+        }
+
+    /*HangmanStickFigure*/
+        .gallowBackground_div{
+            border: solid 0.5em;
+            border-radius: 1em;
+            background-color: rgb(242, 151, 151);
+        }
+        .hangmanStickFigure_div{
+            width: 30em;  
+            height: 20em;
+            text-align: center;
+        }
+
+/*FOOTER*/
     .footer_icon{
         padding: 0.3em;
     }
+    
+    
+@media screen {
+    
+}
 
-/*LetterInputDisplay*/
-    .btnInput_div{
-        margin: 0.5em;
-        border: solid 0.5em;
-        border-radius: 1em;
-        background-color: rgb(59, 163, 233);
-        text-align: center;
-        
-    }
-    .btnRows_div{
-        margin:0.5em;
-    }
-    .btnRow_span{
-        
-    }
-    .indv_btns{
-        width:1.8em;
-        height:1.8em;
-        font-size: 2em;
-    }
-/*HangmanStickFigure*/
-    .gallowBackground_div{
-        border: solid 0.5em;
-        border-radius: 1em;
-        background-color:rgb(79, 168, 196);
-
-        
-    }
