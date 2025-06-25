@@ -4,12 +4,8 @@ import HangmanStickfigure from "./HangmanStickFigure";
 import wrongInputSound1 from "C:/Workspace/hangman_app/src/components/audio/wrong-47985.mp3";
 import correctInputSound1 from "C:/Workspace/hangman_app/src/components/audio/soft-subtle-ui-pop-sfx-348820.mp3";
 import './components.css';
-//TO-DO 
-    //add a dictionary api to include meaning of the word on either haswon or haslost.
-    //Render keyboard input dynamically (.map() or somethine else)
-    //a message that tells the user to turn around while inputing user word
-function GameModeDisplay(){
 
+function GameModeDisplay(){
 //VARIABLES
     const pageTitleString = "Hangman";
     const pageTitleArr = pageTitleString.split(''); 
@@ -22,15 +18,38 @@ function GameModeDisplay(){
     const [randomWord, setRandomWord] = useState("");
     const randomWordLengthRef = useRef();
     const [errMsg1, setErrMsg1] = useState("");
+    const [errMsg3, setErrMsg3] = useState("");
     const errMsgRef1 = useRef();
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
     const [guessedLettersArr, setGuessedLettersArr] = useState([]);
     const [wrongGuessesArr, setWrongGuessesArr] = useState([]);
     const [visibilityArr, setVisibilityArr] = useState([]);
-    const wrongInputSound = new Audio(wrongInputSound1);
-    const correctInputSound = new Audio(correctInputSound1);
+    
+//SOUND_ENGINE
+    const loadSoundFx = (src) =>{
+        try {
+           let soundFx = new Audio(src);
+           return soundFx
+        } catch (error) {
+            setErrMsg3(`Error loading or playing soundFx from ${src}. The game is still playable.`);
+            console.log(errMsg3)
+        }
+    }
 
+    const playSoundFx = (soundFx) =>{
+        try {
+           if(soundFx){
+            soundFx.play()
+           }
+        } catch (error) {
+            setErrMsg3(`Error playing ${soundFx}. The game is still playable.`);
+            console.log(errMsg3)
+        }
+    }
+
+    const wrongInputSound = loadSoundFx(wrongInputSound1);
+    const correctInputSound = loadSoundFx(correctInputSound1);
 //TITLE
     const processedPageTitleArr = pageTitleArr.map((letter, index)=>{
         return(
@@ -105,6 +124,7 @@ function GameModeDisplay(){
     },[word]);
     //console.log('wordArr is', wordArr);
 
+
 //USER_INPUT    
     const handleUserInput = (letter, index) => {
         setUserInput(letter);
@@ -113,11 +133,11 @@ function GameModeDisplay(){
         if(!wordArr.includes(upperCaseLetters)){
             setCount(count+1);
             setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
-            wrongInputSound.play();
+            playSoundFx(wrongInputSound);
 
         }else if(wordArr.includes(upperCaseLetters)){
             setGuessedLettersArr([...guessedLettersArr, upperCaseLetters])
-            correctInputSound.play(); 
+            playSoundFx(correctInputSound); 
         }
         //console.log('guessedLettersArr:', guessedLettersArr)
         //console.log(`count is ${count+1}`);
@@ -232,6 +252,7 @@ function GameModeDisplay(){
         <div className="pageRenderer_div">
             
             <div className="top_container">
+                <div className="errMsg3">{errMsg3}</div>
                 <h1>{processedPageTitleArr}</h1>
                 <div className="button_container">
                     <div className="randomWord_div">  
