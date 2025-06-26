@@ -1,4 +1,3 @@
-
 .pageRenderer_div{
     display: grid;
     grid-template-areas: 
@@ -6,22 +5,20 @@
     "mid"
     "bottom"
     "footer";
-    
 }
 /*ALL_CONTAINERS*/
     .top_container{
-        grid-area: top;
-        
+        grid-area: top;      
     }
     .title{
         border-bottom: solid rgb(0, 0, 0);
-        border-bottom-width: 0.2em ;
-        width: 0.8em;
+        border-bottom-width: 0.5vh ;
+        width: 3%;
         text-align: center;
         display:inline-block;
-        margin: 0.2em;
-        padding:0.1em;
-        margin-bottom: 0.7em;
+        margin: 0.5vw;
+        padding:0.1vh;
+        margin-bottom: 0.2em;
         user-select: none;
         font-size: 0.8em ;
         font-family: cursive;
@@ -30,17 +27,17 @@
         text-align: center;
         font-family: cursive;
         font-size: 3em;
-        margin-bottom: -0.2em;
+        margin-bottom: 0.2em;
         margin-top: 0.2em;
-           
+             
     }
     .middle_container{
         grid-area: mid;
         border-style: groove;
         border-radius: 1em;
-        min-height: 15em;
-        width: 50em;
-        margin: 2em;
+        max-height: 30%;
+        max-width: 30%;
+        margin: 1%;
         justify-self: center;
         background-color: white;
     }
@@ -51,10 +48,10 @@
         align-items: center;
     }
     #footer{
-    text-align: center;
-    font-weight: 600;
-    padding:3em;
-    grid-area: footer;
+        text-align: center;
+        font-weight: 600;
+        padding:3em;
+        grid-area: footer;
 }
 
 /*TOP_CONTAINER*/
@@ -62,7 +59,7 @@
         color: black;
         background-color: white;
         border: 2px solid;
-        font-size: 1.3em;
+        font-size: 2vh;
     }
     .button:hover{
         cursor: pointer;
@@ -73,54 +70,52 @@
             "random restart"
             "user restart";
         grid-template-columns: 2.4fr 1fr;
-        align-items: center;
-        column-gap: 0.2em;
-        border: solid 0.5em rgb(0, 0, 0);
+        border: solid 0.3em rgb(0, 0, 0);
         border-radius: 1em;
-        width:45em;
-        justify-self: center;
-        margin-top: 1em;
+        width:50vw;
+        height: 10vh;
+        justify-self:center;
+/*how do I center the group of buttons inside the div?*/
         padding:1em;
         background-color: white;
+    }
+    .randomWord_div, .userWord_div{
+        grid-area: random;
+        align-self: center;
+        padding: 0.2em;     
+        width: 100%;
+        height: 100%;
+    }
+    .randomWord_btn, .userWord_btn{
+        width:50%;
+        height:100%;
+        border-radius: 0.5em; 
+    }
+    .userWord_input, .numOfLetters_input{
+        height:80%;
+        font-size: 2vh;
     }
     .errMsg{
         color: crimson;
     }
     
     /*randomWord_div*/
-        .randomWord_div{
-            grid-area: random;
-            align-self: center;
-            padding: 0.2em
-        }
         .randomWord_btn{
-            width:9em;
-            height:2em;
-            border-radius: 0.5em; 
-            border: 2px solid #04AA6D; 
+            border: 2px solid #04AA6D;
         }
         .randomWord_btn:hover{
             background-color:  #04AA6D;
             color: white
         }
         .numOfLetters_input{
-            width:3.8em;
-            height:1.7em;
-            font-size: 1.3em;
-            
+            width:20%;    
         }
     
     /*userWord_div*/    
         .userWord_div{
             grid-area: user;
-            align-self: center;
-            padding: 0.2em
-
         }
         .userWord_btn{
-            width:9em;
-            height:2em;
-            border-radius: 0.5em; 
             border: 2px solid #008CBA;
         }
         .userWord_btn:hover{
@@ -128,19 +123,18 @@
             color: white
         }
         .userWord_input{
-            width:9em;
-            height:1.7em;
-            font-size: 1.3em;
+            width:40%;
         }
     
     /*restGame_btn_div*/       
         .resetGame_btn_div{
             grid-area: restart;
             align-self: top;
+            margin-left: 20%;
         }
         .resetGame_btn{
-            width:9em;
-            height:4em;
+            width:100%;
+            height:100%;
             border-radius: 1em;
             border: 2px solid #f44336;
         }
@@ -180,7 +174,7 @@
             font-size: 2em;
             padding: 0.1em;
             border-radius: 1em;
-            width: 13em;
+            width: 40%;
             justify-self: center; 
         }
         .hasWon_msg{
@@ -206,9 +200,6 @@
             margin: 0.5em;
             padding: 0.5em;
         }
-        .btnRow_span{
-            
-        }
         .indv_btns{
             width:1.8em;
             height:1.8em;
@@ -221,11 +212,6 @@
             color:white !important;
             background-color: #008CBA;
         }
-        .letterInputDisplay_div{
-        
-            
-        }
-
     /*HangmanStickFigure*/
         .gallowBackground_div{
             border: solid 0.5em;
@@ -233,8 +219,8 @@
             background-color: rgb(242, 151, 151);
         }
         .hangmanStickFigure_div{
-            width: 30em;  
-            height: 20em;
+            min-width: 30em;  
+            min-height: 20em;
             text-align: center;
         }
 
@@ -244,7 +230,63 @@
     }
     
     
-@media screen {
-    
+@media only screen and (max-width: 430px) {
+  /* Adjust styles for smaller screens here */
+  .pageRenderer_div {
+    grid-template-rows: auto auto auto auto;
+    height: auto;
+    width: auto;
+  }
+  .middle_container {
+    min-width: 90%; /* Make it take up most of the screen width */
+    margin: 1em auto; /* Center it horizontally */
+  }
+
+  .button_container {
+    max-width: 50%; /* Make it take up most of the screen width */
+    grid-template-columns: 1fr; /* Stack buttons vertically */
+    grid-template-areas:
+      "random"
+      "user"
+      "restart";
+  }
+  .bottom_container{
+    display: inline;
+  }
+  .randomWord_btn, .userWord_btn, .resetGame_btn {
+    min-width: 100%; /* Make buttons take up full width */
+    justify-content: center;
+  }
+  
+  .hangmanStickFigure_div {
+    max-width: 60%; /* Make it take up most of the screen width */
+    min-height: 15em; /* Set a minimum height */
+    max-height: 20em; /* Reduce height for smaller screens */
+    margin: auto;
 }
 
+  .btnInput_div {
+    height: auto; /* Let it adjust to content height */
+    max-width: 60%; /* Make it take up most of the screen width */
+    min-height: 10em; /* Set a minimum height */
+    margin: auto;
+}
+  .indv_btns{
+    width:0.5%;
+    height:0.5%;
+    font-size: 22px;
+    margin:0.1em;
+  }
+  .middle_container, .button_container, .hangmanStickFigure_div {
+    min-width: unset;
+    min-height: unset;
+  }
+  #footer {
+    padding: 1em;
+    max-height: 10em;
+  }
+}
+
+/*- max-width: 480px for smaller mobile devices
+- max-width: 768px for larger mobile devices and tablets
+- max-width: 1024px for smaller desktop screens*/

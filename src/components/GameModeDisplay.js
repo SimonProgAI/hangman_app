@@ -7,7 +7,7 @@ import './components.css';
 
 function GameModeDisplay(){
 //VARIABLES
-    const pageTitleString = "Hangman";
+    const pageTitleString = "HANGMAN";
     const pageTitleArr = pageTitleString.split(''); 
     const userWordRef = useRef();
     const errMsgRef2 = useRef();
