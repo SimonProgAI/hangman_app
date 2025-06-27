@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/hangman_app/static/css/main.6612acd5.css",
+    "main.css": "/hangman_app/static/css/main.5e5d2879.css",
     "main.js": "/hangman_app/static/js/main.5be2aa76.js",
     "static/js/453.5a9b8c6d.chunk.js": "/hangman_app/static/js/453.5a9b8c6d.chunk.js",
     "static/media/wrong-47985.mp3": "/hangman_app/static/media/wrong-47985.aed02e6522662213469b.mp3",
@@ -9,12 +9,12 @@
     "static/media/github-mark.svg": "/hangman_app/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "static/media/envelope-svgrepo-com.svg": "/hangman_app/static/media/envelope-svgrepo-com.ce029c0ecfeea7d252052296b38d09b2.svg",
     "index.html": "/hangman_app/index.html",
-    "main.6612acd5.css.map": "/hangman_app/static/css/main.6612acd5.css.map",
+    "main.5e5d2879.css.map": "/hangman_app/static/css/main.5e5d2879.css.map",
     "main.5be2aa76.js.map": "/hangman_app/static/js/main.5be2aa76.js.map",
     "453.5a9b8c6d.chunk.js.map": "/hangman_app/static/js/453.5a9b8c6d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6612acd5.css",
+    "static/css/main.5e5d2879.css",
     "static/js/main.5be2aa76.js"
   ]
 }
