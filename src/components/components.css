@@ -330,7 +330,7 @@
         
     }
     .hangmanStickFigure_div {
-        width: 98vw; /* Make it take up most of the screen width */
+        width: 98vw; 
         height: 20vh;
         margin: auto;
     }

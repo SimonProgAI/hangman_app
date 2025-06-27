@@ -18,7 +18,7 @@ const HangmanStickfigure = ({count}) => {
                 <line x1="140" y1="150" x2="105" y2="190" style={{stroke: leftLegColor, strokeWidth: '6', strokeLinecap: 'round'}}/>
                 <line x1="140" y1="150" x2="175" y2="190" style={{stroke: rightLegColor, strokeWidth: '6', strokeLinecap: 'round'}}/>
 
-                <line x1="140" y1="25" x2="140" y2="60 " style={{stroke: 'brown', strokeWidth: '3'}}/>
+                
                 <line x1="120" y1="25" x2="55" y2="80" style={{stroke: 'black', strokeWidth: '6'}}/>
                 <rect width="120" height="10" x="50" y="20" rx="5" ry="5" fill="black" />
                 <rect width="10" height="210" x="50" y="20" rx="5" ry="5" fill="black" />
@@ -27,5 +27,5 @@ const HangmanStickfigure = ({count}) => {
         </div>
     );
 };
-
+//<line x1="140" y1="25" x2="140" y2="60 " style={{stroke: 'brown', strokeWidth: '3'}}/> the "rope" was not working on smallerscreens
 export default HangmanStickfigure;
