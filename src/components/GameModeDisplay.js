@@ -9,17 +9,17 @@ function GameModeDisplay(){
 //VARIABLES
     const pageTitleString = "HANGMAN";
     const pageTitleArr = pageTitleString.split(''); 
+    const randomWordLengthRef = useRef();
     const userWordRef = useRef();
+    const errMsgRef1 = useRef();
     const errMsgRef2 = useRef();
+    const [randomWord, setRandomWord] = useState("");
     const [userWord, setUserWord] = useState("");
+    const [errMsg1, setErrMsg1] = useState("");
     const [errMsg2, setErrMsg2] = useState("");
+    const [errMsg3, setErrMsg3] = useState("");
     const [word, setWord] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
-    const [randomWord, setRandomWord] = useState("");
-    const randomWordLengthRef = useRef();
-    const [errMsg1, setErrMsg1] = useState("");
-    const [errMsg3, setErrMsg3] = useState("");
-    const errMsgRef1 = useRef();
     const [userInput, setUserInput] = useState("");
     const [count, setCount] = useState(0);
     const [guessedLettersArr, setGuessedLettersArr] = useState([]);
@@ -57,14 +57,14 @@ function GameModeDisplay(){
         )
     })
 
-//USER_CREATED_WORD 
+//USER_WORD 
     const createUserWord = ()=>{ 
         const userWord = userWordRef.current.value;
         function hasOnlyLettersAndHyphen(word){
             return /^[a-zA-Z-]+$/.test(word)
         }
         if(userWord.length<2||userWord.length>17){
-            setErrMsg2("User Word must be between 2 and seventeen 17 characters.")
+            setErrMsg2("User Word must be between 2 and 17 characters.")
         }else if(userWord.includes("--")){
             setErrMsg2("User Word cannot contain two consecutive hyphens.")
         }else if (userWord.includes(" ")){
@@ -160,7 +160,7 @@ function GameModeDisplay(){
         }
     }
 
-//WORD_DISPLAY
+//PROCESSED_WORD_DISPLAY
     useEffect(()=>{
         let tempVisibilityArr = [];
         wordArr.forEach((letter, index) => {
@@ -190,7 +190,7 @@ function GameModeDisplay(){
             return <span key={index} className="letter_display" id="hidden_letter">{letter}</span>
         }
     });
-//WORD_WON_LOST_MSG
+//MESSAGE_TO_DISPLAY
     const messageToDisplay = () => {
         if(hasWon||hasLost){
             return won_lossMsg();
@@ -240,21 +240,21 @@ function GameModeDisplay(){
         }
     },[])
 
-    //RESET_GAME
-        const handleRestart = () => {
-            sessionStorage.clear();
-            setWord("");
-            setIsDisabled(false);
-            setCount(0);
-            setGuessedLettersArr([]);
-            setWrongGuessesArr([]);
-            setVisibilityArr([]);
-            setErrMsg1("");
-            setErrMsg2("");
-            setErrMsg3("");
-            randomWordLengthRef.current.value = "";
-            //console.log(sessionStorage)
-        }
+//RESET_GAME
+    const handleRestart = () => {
+        sessionStorage.clear();
+        setWord("");
+        setIsDisabled(false);
+        setCount(0);
+        setGuessedLettersArr([]);
+        setWrongGuessesArr([]);
+        setVisibilityArr([]);
+        setErrMsg1("");
+        setErrMsg2("");
+        setErrMsg3("");
+        randomWordLengthRef.current.value = "";
+        //console.log(sessionStorage)
+    }
 
 //FINAL_RENDERER
     return(

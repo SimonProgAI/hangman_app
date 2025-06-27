@@ -1,4 +1,3 @@
-
     import './components.css';
 
     const LetterInputDisplay = ({word, handleUserInput, wrongGuessesArr, guessedLettersArr, hasWon, hasLost}) => {
@@ -38,23 +37,8 @@
             ]
 
         ];
-        /*One possible approach is to determine the color (or the sound to play) 
-        directly in the onClick handler, rather than relying on the letterColor state. 
-        This way, you can determine the correct sound to play based on the current state of the button, 
-        rather than relying on the letterColor state being up-to-date.
-
-        Think about how you can modify the onClick handler to determine the correct sound to play, 
-        without relying on the letterColor state.*/ 
+      
         let letterColor;
-        
-        
-        /*const playSoundFx = (letter)=>{
-            if(guessedLettersArr.includes(letter)){
-                correctInputSound.play()
-            }else if(wrongGuessesArr.includes(letter)){
-                wrongInputSound.play()
-            }
-        }*/
         
         const btnInput = btnRows.map((rowArr, index)=>{
             
@@ -75,7 +59,7 @@
                     }
                 }
                 return(
-                    <span key={btn.id} className='btnRow_span'>
+                    <span key={btn.id}>
                         <button onClick={()=>handleUserInput(btn.letter)} disabled={keyboardStatus()}  style={letterColor} className='indv_btns'>{btn.letter}</button>
                     </span>
                 )
