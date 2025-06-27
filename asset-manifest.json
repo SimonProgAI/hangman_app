@@ -1,17 +1,20 @@
 {
   "files": {
     "main.css": "/hangman_app/static/css/main.0dcf19df.css",
-    "main.js": "/hangman_app/static/js/main.15f0b52a.js",
+    "main.js": "/hangman_app/static/js/main.e1be8b11.js",
     "static/js/453.5a9b8c6d.chunk.js": "/hangman_app/static/js/453.5a9b8c6d.chunk.js",
     "static/media/wrong-47985.mp3": "/hangman_app/static/media/wrong-47985.aed02e6522662213469b.mp3",
     "static/media/soft-subtle-ui-pop-sfx-348820.mp3": "/hangman_app/static/media/soft-subtle-ui-pop-sfx-348820.a179d1912bedd13094d2.mp3",
+    "static/media/LinkedIn_icon.svg": "/hangman_app/static/media/LinkedIn_icon.a236a02cbeb24525fd3bcf55fc6e41c6.svg",
+    "static/media/github-mark.svg": "/hangman_app/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
+    "static/media/envelope-svgrepo-com.svg": "/hangman_app/static/media/envelope-svgrepo-com.ce029c0ecfeea7d252052296b38d09b2.svg",
     "index.html": "/hangman_app/index.html",
     "main.0dcf19df.css.map": "/hangman_app/static/css/main.0dcf19df.css.map",
-    "main.15f0b52a.js.map": "/hangman_app/static/js/main.15f0b52a.js.map",
+    "main.e1be8b11.js.map": "/hangman_app/static/js/main.e1be8b11.js.map",
     "453.5a9b8c6d.chunk.js.map": "/hangman_app/static/js/453.5a9b8c6d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0dcf19df.css",
-    "static/js/main.15f0b52a.js"
+    "static/js/main.e1be8b11.js"
   ]
 }
