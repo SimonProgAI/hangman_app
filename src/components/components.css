@@ -12,45 +12,38 @@
     }
     .title{
         border-bottom: solid rgb(0, 0, 0);
-        border-bottom-width: 0.5vh ;
-        width: 3%;
-        text-align: center;
+        border-bottom-width: 0.5vw ;
+        width: 3vw;
         display:inline-block;
-        margin: 0.5vw;
-        padding:0.1vh;
-        margin-bottom: 0.2em;
+        margin: 0vh 0.5vw;
         user-select: none;
-        font-size: 0.8em ;
+        font-size: 3vw ;
         font-family: cursive;
     }
     .top_container>h1{
         text-align: center;
-        font-family: cursive;
-        font-size: 3em;
-        margin-bottom: 0.2em;
-        margin-top: 0.2em;
-             
     }
-    .middle_container{
+    .middle_container {
         grid-area: mid;
         border-style: groove;
         border-radius: 1em;
-        max-height: 30%;
-        max-width: 30%;
-        margin: 1%;
+        height: 15vh;
+        width: 90vw;
+        margin: 2vh;
         justify-self: center;
         background-color: white;
     }
     .bottom_container{
         grid-area: bottom;
         display:flex;
-        justify-content:space-around;
+        justify-content:space-evenly;
         align-items: center;
+        width:100%;
+        
     }
     #footer{
-        text-align: center;
-        font-weight: 600;
-        padding:3em;
+        display: flex;
+        justify-content: center;
         grid-area: footer;
 }
 
@@ -58,7 +51,7 @@
     .button{
         color: black;
         background-color: white;
-        border: 2px solid;
+        border: 4vh solid;
         font-size: 2vh;
     }
     .button:hover{
@@ -66,37 +59,39 @@
     }
     .button_container{
         display:grid;
-        grid-template-areas: 
-            "random restart"
-            "user restart";
+        grid-template-areas: "random restart" "user restart" "error error";
         grid-template-columns: 2.4fr 1fr;
-        border: solid 0.3em rgb(0, 0, 0);
+        grid-template-rows: 7.5vh 7.5vh;
+        border: solid 0.2em rgb(0, 0, 0);
         border-radius: 1em;
         width:50vw;
-        height: 10vh;
+        height: auto;
         justify-self:center;
-/*how do I center the group of buttons inside the div?*/
-        padding:1em;
         background-color: white;
+        padding-bottom: 4vh;
     }
     .randomWord_div, .userWord_div{
         grid-area: random;
-        align-self: center;
-        padding: 0.2em;     
-        width: 100%;
-        height: 100%;
+        width: 30vw;
+        height: 7vh;
+        margin: 0.6vh 0.5vw;
+      
     }
     .randomWord_btn, .userWord_btn{
-        width:50%;
-        height:100%;
-        border-radius: 0.5em; 
+        width:15vw;
+        height:6vh;
+        border-radius: 0.5em;
+        font-size: 2.5vh; 
     }
     .userWord_input, .numOfLetters_input{
-        height:80%;
+        height:5vh;
         font-size: 2vh;
     }
     .errMsg{
+        grid-area: error;
         color: crimson;
+        font-size: medium;
+        
     }
     
     /*randomWord_div*/
@@ -108,7 +103,7 @@
             color: white
         }
         .numOfLetters_input{
-            width:20%;    
+            width:5vw;    
         }
     
     /*userWord_div*/    
@@ -116,27 +111,30 @@
             grid-area: user;
         }
         .userWord_btn{
-            border: 2px solid #008CBA;
+            border: 0.3vh solid #008CBA;
         }
         .userWord_btn:hover{
             background-color: #008CBA;
             color: white
         }
         .userWord_input{
-            width:40%;
+            width:13vw;
         }
     
     /*restGame_btn_div*/       
         .resetGame_btn_div{
             grid-area: restart;
-            align-self: top;
-            margin-left: 20%;
+            width: 15vw;
+            height: 10vw;
         }
         .resetGame_btn{
-            width:100%;
-            height:100%;
+            width:12vw;
+            height:12vh;
             border-radius: 1em;
             border: 2px solid #f44336;
+            font-size: 2.5vh;
+            align-self: center;
+            margin-top: 1.5vh;
         }
         .resetGame_btn:hover{
             background-color: #f44336;
@@ -144,20 +142,21 @@
         }
 /*MIDDLE_CONTAINER*/
     /*processedWordArr_div*/
-        .processedWordArr_div{
-            text-align: center;
-            margin: 2em;
-            justify-self: center;
+        .processedWordArr_div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* or set a specific height */
         }
         .letter_display{
             border-bottom: solid rgb(0, 0, 0);
-            border-bottom-width: 0.2em ;
-            width: 2em;
+            border-bottom-width: 0.5vw ;
+            width: 4.5vw;
             text-align: center;
             display:inline-block;
-            margin: 0.2em;
+            margin:0 0.5vw 2vw 0.5vw;
             user-select: none;
-            font-size: 2em ;
+            font-size: 4vh ;
             font-family: cursive;
         }
         #hidden_letter{
@@ -166,16 +165,14 @@
         }
 
     /*won_lossMsg_div*/
-        .won_lossMsg_div>div{
-            /*border: solid;*/
-            text-align: center;
-            margin: 0.3em;
-            padding-bottom: 0.2em;
-            font-size: 2em;
-            padding: 0.1em;
+        .hasLost_msg, .hasWon_msg{
+            display: flex;
+            width: 90%;
+            height: 70%;
+            justify-content: center;
+            align-items: center;
             border-radius: 1em;
-            width: 40%;
-            justify-self: center; 
+            font-size: 5vh;
         }
         .hasWon_msg{
             background-color:#04AA6D;
@@ -186,25 +183,28 @@
 
 /*BOTTOM_CONTAINER*/
     /*LetterInputDisplay*/
-        .btnInput_div{
-            margin: 0.5em;
-            border: solid 0.5em;
+        .btnInput_div, .hangmanStickFigure_div{
+            height: 38vh;
+            border: solid 0.5vh;
             border-radius: 1em;
-            background-color: rgb(118, 199, 252);
             text-align: center;
-            height: 19em;
+        }
+        .btnInput_div{
+            margin: 0.5vw;
+            background-color: rgb(118, 199, 252);
+            width: 60vw
         }
         .btnRows_div{
             display: flex;
             justify-content: center;
-            margin: 0.5em;
-            padding: 0.5em;
+            margin: 3.5vh;
+            
         }
         .indv_btns{
-            width:1.8em;
-            height:1.8em;
-            font-size: 2em;
-            margin:0.1em;
+            width:5vw;
+            height:7vh;
+            font-size: 5vh;
+            margin:0.1vh;
             border-radius: 0.2em;
         }
         .indv_btns:hover{
@@ -213,80 +213,130 @@
             background-color: #008CBA;
         }
     /*HangmanStickFigure*/
-        .gallowBackground_div{
-            border: solid 0.5em;
-            border-radius: 1em;
+    
+        .hangmanStickFigure_div {
             background-color: rgb(242, 151, 151);
+            width: 35vw;
+            display: flex; /* Add this */
+            justify-content: center; /* Add this */
+            align-items: center; /* Add this */
         }
-        .hangmanStickFigure_div{
-            min-width: 30em;  
-            min-height: 20em;
-            text-align: center;
+        .gallowBackground_div>svg{
+            width: 20vw;
         }
 
 /*FOOTER*/
     .footer_icon{
-        padding: 0.3em;
+        padding: 0.5em 0.3em;
+        width: 5vh;
+        height: 5vh;
+    }
+    #footer>h3{
+        font-weight: 600;
+        margin: 1.5vh;
     }
     
     
-@media only screen and (max-width: 430px) {
-  /* Adjust styles for smaller screens here */
-  .pageRenderer_div {
-    grid-template-rows: auto auto auto auto;
-    height: auto;
-    width: auto;
-  }
-  .middle_container {
-    min-width: 90%; /* Make it take up most of the screen width */
-    margin: 1em auto; /* Center it horizontally */
-  }
+@media only screen and (max-width: 768px) {
+ 
+    .pageRenderer_div {
+        display: grid;
+        grid-template-areas: "top" "mid" "bottom" "footer";
+        height: auto; 
+        overflow-y: auto; 
+    }
+    .title{
+        border-bottom-width: 1vw ;
+        width: 10vw;
+        font-size: 7vw ;
+    }    
+    .button_container{
+        width: 98vw;
+        height: auto;
+        padding-bottom: 3vh;
+    }
+    .randomWord_div, .userWord_div{
+        display: flex;
+        width:70vw;
+        height: 12vh;
+        flex-direction: row; 
+        align-items: center;
 
-  .button_container {
-    max-width: 50%; /* Make it take up most of the screen width */
-    grid-template-columns: 1fr; /* Stack buttons vertically */
-    grid-template-areas:
-      "random"
-      "user"
-      "restart";
-  }
-  .bottom_container{
-    display: inline;
-  }
-  .randomWord_btn, .userWord_btn, .resetGame_btn {
-    min-width: 100%; /* Make buttons take up full width */
-    justify-content: center;
-  }
+    }
+    .userWord_div{
+        margin-top: 3vh;       
+    }
+    .randomWord_btn, .userWord_btn{
+        width:30vw;
+        height: 8vh;
+        margin-right: 0.5vh;
+        justify-content: center; 
+    }
+    .numberOfLetters_input, .userWord_input{
+        height: 6vh;
+        width: 100%;
+    }
+    .numOfLetters_input{
+        width: 20vw;
+    }
+    .userWord_input{
+        width: 35vw;
+        margin-bottom: 2px;
+        
+    } 
+    .errMsg{
+        font-size:medium;
+        margin-top:6vh;
+        margin-left:5vw;
+    }
+    .resetGame_btn{
+        width: 25vw;
+        height: 19vh;
+    }
+    .middle_container {
+        width: 98vw; 
+        margin: auto; 
+    }
+    .processedWordArr_div{
+        width: 100%;
+    }
+    .letter_display{
+        font-size: 3vh ;
+        flex: 1;
+    }
+    .hasLost_msg, .hasWon_msg{
+        display: flex;
+        width: 98%;
+        height: 90%;
+        text-align: center;
+        border-radius: 0.5em;
+        font-size: 4vh;
+    }
+    .bottom_container{
+        display: inline;
+    }
   
-  .hangmanStickFigure_div {
-    max-width: 60%; /* Make it take up most of the screen width */
-    min-height: 15em; /* Set a minimum height */
-    max-height: 20em; /* Reduce height for smaller screens */
-    margin: auto;
-}
+   .btnInput_div {
+        height: auto; 
+        width: 98vw; 
+        height: 30vh; 
+        margin: auto;
+    }
+    .indv_btns{
+        width:9.5vw;
+        height:6vh;
+        font-size: 3.5vh;
+        margin: auto;
+        
+    }
+    .hangmanStickFigure_div {
+        width: 98vw; /* Make it take up most of the screen width */
+        height: 20vh;
+        margin: auto;
+    }
 
-  .btnInput_div {
-    height: auto; /* Let it adjust to content height */
-    max-width: 60%; /* Make it take up most of the screen width */
-    min-height: 10em; /* Set a minimum height */
-    margin: auto;
-}
-  .indv_btns{
-    width:0.5%;
-    height:0.5%;
-    font-size: 22px;
-    margin:0.1em;
-  }
-  .middle_container, .button_container, .hangmanStickFigure_div {
-    min-width: unset;
-    min-height: unset;
-  }
-  #footer {
-    padding: 1em;
-    max-height: 10em;
-  }
-}
+    .gallowBackground_div>svg{
+            width: 25vh;
+        }
 
-/*- max-width: 480px for smaller mobile devices
-- max-width: 768px for larger mobile devices and tablets
-- max-width: 1024px for smaller desktop screens*/
+} 

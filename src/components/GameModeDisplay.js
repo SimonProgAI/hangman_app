@@ -64,15 +64,15 @@ function GameModeDisplay(){
             return /^[a-zA-Z-]+$/.test(word)
         }
         if(userWord.length<2||userWord.length>17){
-            setErrMsg2("Word must be between two(2) and seventeen(17) characters.")
+            setErrMsg2("User Word must be between 2 and seventeen 17 characters.")
         }else if(userWord.includes("--")){
-            setErrMsg2("Word cannot contain two consecutive hyphens.")
+            setErrMsg2("User Word cannot contain two consecutive hyphens.")
         }else if (userWord.includes(" ")){
-            setErrMsg2("Word cannot contain spaces.")
+            setErrMsg2("User Word cannot contain spaces.")
         }else if(userWord.startsWith("-")||userWord.endsWith("-")){
-            setErrMsg2("Word cannot begin or end with an hyphen.")
+            setErrMsg2("User Word cannot begin or end with an hyphen.")
         }else if(!hasOnlyLettersAndHyphen(userWord)){
-            setErrMsg2("Word must contain letters and no more than one hyphen.")
+            setErrMsg2("User Word must contain letters and no more than one hyphen.")
         }else if(hasOnlyLettersAndHyphen(userWord)){
             setUserWord(userWord);
             setWord(userWord.toUpperCase());
@@ -89,12 +89,13 @@ function GameModeDisplay(){
 //RANDOM_WORD_API
     const handleRandomWord = () => {
         const randomWordLength = Number(randomWordLengthRef.current.value);
-        if(randomWordLength<2||randomWordLength>16){
-            setErrMsg1("Select between 2 and 16 characters.")
+        if(randomWordLength<2||randomWordLength>9){
+            setErrMsg1(" Random Word must be between 2 and 9 characters.")
         }else if (randomWordLength>1&&randomWordLength<17){
             setIsDisabled(true);
-            const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
-            fetch(url)
+            //const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
+            const url2 = `https://random-word-api.vercel.app/api?words=1&length=${randomWordLength}`;
+            fetch(url2)
                 .then(response => {
                     if(!response.ok){
                         throw new Error(`HTTP error! status: ${response.status}`)
@@ -150,7 +151,7 @@ function GameModeDisplay(){
     const won_lossMsg = () => {
         if (hasWon===true&&guessedLettersArr.length!==0){
             return(
-                <div className="hasWon_msg">Correct!</div>
+                <div className="hasWon_msg">Correct! The word was "{wordArr.join("")}".</div>
             )
         }else if (hasLost===true){
             return(
@@ -189,7 +190,14 @@ function GameModeDisplay(){
             return <span key={index} className="letter_display" id="hidden_letter">{letter}</span>
         }
     });
-
+//WORD_WON_LOST_MSG
+    const messageToDisplay = () => {
+        if(hasWon||hasLost){
+            return won_lossMsg();
+        }else{
+            return processedWordArr;
+        }
+    }
 //SESSION_STORAGE
     useEffect(()=>{
         if(word && word.length>0){
@@ -243,6 +251,7 @@ function GameModeDisplay(){
             setVisibilityArr([]);
             setErrMsg1("");
             setErrMsg2("");
+            setErrMsg3("");
             randomWordLengthRef.current.value = "";
             //console.log(sessionStorage)
         }
@@ -257,31 +266,29 @@ function GameModeDisplay(){
                 <div className="button_container">
                     <div className="randomWord_div">  
                         <button onClick={handleRandomWord} disabled={isDisabled} className="randomWord_btn button">Random Word</button>
-                        <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="16" 
+                        <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="9" 
                             disabled={isDisabled} className="numOfLetters_input"/>
                         <br/>
-                        <span ref={errMsgRef1} className="errMsg">{errMsg1}</span>
+                        
                     </div> 
                     <div className="userWord_div">
                         <span>
-                        <button onClick={createUserWord} disabled={isDisabled} className="userWord_btn button">User Selected</button>
+                        <button onClick={createUserWord} disabled={isDisabled} className="userWord_btn button">User Word</button>
                         <input type="text" ref={userWordRef} disabled={isDisabled} placeholder="enter a word..."className="userWord_input"></input>
                         </span>
-                        <br/>
-                        <span ref={errMsgRef2} className="errMsg">{errMsg2}</span>
-                        
                     </div>
                     <div className="resetGame_btn_div">
                         <button onClick={handleRestart} className="resetGame_btn button">Reset Game</button>
+                    </div>
+                    <div className="errMsg">
+                        <span ref={errMsgRef2}>{errMsg2}</span>
+                        <span ref={errMsgRef1}>{errMsg1}</span>
                     </div>
                 </div>
             </div>
             <div className="middle_container"> 
                 <div className="processedWordArr_div">
-                    {processedWordArr}
-                </div>
-                <div className="won_lossMsg_div">
-                    {won_lossMsg()}
+                    {messageToDisplay()}
                 </div>
             </div>
             <div className="bottom_container">
@@ -295,10 +302,10 @@ function GameModeDisplay(){
                 </div>
             </div>
             <div>
-                <footer id="footer">
-                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src="/github-mark.svg" height="45" width="45" className="footer_icon"></img></a>
-                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="/LinkedIn_icon.svg" height="45" width="45" className="footer_icon"></img></a>
-                    <a href="mailto:lupiensimon@hotmail.com"><img src="/envelope-svgrepo-com.svg" height="45" width="45" className="footer_icon"></img></a>
+                <footer id="footer"> 
+                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src="/github-mark.svg" className="footer_icon"></img></a>
+                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="/LinkedIn_icon.svg" className="footer_icon"></img></a>
+                    <a href="mailto:lupiensimon@hotmail.com"><img src="/envelope-svgrepo-com.svg" className="footer_icon"></img></a>
                     <h3>©2025 Simon Lupien</h3>
                 </footer>
             </div>

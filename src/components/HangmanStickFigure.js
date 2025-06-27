@@ -10,7 +10,7 @@ const HangmanStickfigure = ({count}) => {
 
     return (
         <div className='gallowBackground_div'>
-            <svg width="300" height="300" > 
+            <svg viewBox="0 0 300 250" width="100%" height="100%"> 
                 <circle cx="140" cy="80" r="20" style={{fill: headColor}}/>
                 <line x1="140" y1="150" x2="140" y2="98"  style={{stroke: torsoColor, strokeWidth: '8', strokeLinecap: 'round'}}/>
                 <line x1="140" y1="110" x2="105" y2="130" style={{stroke: leftArmColor, strokeWidth: '6', strokeLinecap: 'round'}}/>
