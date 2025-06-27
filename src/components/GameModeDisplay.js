@@ -3,9 +3,9 @@ import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
 import wrongInputSound1 from "C:/Workspace/hangman_app/src/components/audio/wrong-47985.mp3";
 import correctInputSound1 from "C:/Workspace/hangman_app/src/components/audio/soft-subtle-ui-pop-sfx-348820.mp3";
-import githubLogo from './images/github-mark.svg';
-import linkedinLogo from './images/LinkedIn_icon.svg';
-import emailLogo from './images/envelope-svgrepo-com.svg';
+import githubLogo from 'C:/Workspace/hangman_app/src/components/images/github-mark.svg';
+import linkedinLogo from 'C:/Workspace/hangman_app/src/components/images/LinkedIn_icon.svg';
+import emailLogo from 'C:/Workspace/hangman_app/src/components/images/envelope-svgrepo-com.svg';
 import './components.css';
 
 function GameModeDisplay(){
