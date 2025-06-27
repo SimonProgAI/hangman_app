@@ -303,9 +303,9 @@ function GameModeDisplay(){
             </div>
             <div>
                 <footer id="footer"> 
-                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src="/src/components/images/github-mark.svg" className="footer_icon"></img></a>
-                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="/src/components/images/LinkedIn_icon.svg" className="footer_icon"></img></a>
-                    <a href="mailto:lupiensimon@hotmail.com"><img src="/src/components/images/envelope-svgrepo-com.svg" className="footer_icon"></img></a>
+                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src={process.env.PUBLIC_URL + '/images/github-mark.svg'} className="footer_icon"></img></a>
+                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="./src/components/images/LinkedIn_icon.svg" className="footer_icon"></img></a>
+                    <a href="mailto:lupiensimon@hotmail.com"><img src="./src/components/images/envelope-svgrepo-com.svg" className="footer_icon"></img></a>
                     <h3>©2025 Simon Lupien</h3>
                 </footer>
             </div>
