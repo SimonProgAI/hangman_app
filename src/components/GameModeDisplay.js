@@ -3,6 +3,9 @@ import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
 import wrongInputSound1 from "C:/Workspace/hangman_app/src/components/audio/wrong-47985.mp3";
 import correctInputSound1 from "C:/Workspace/hangman_app/src/components/audio/soft-subtle-ui-pop-sfx-348820.mp3";
+import githubLogo from './images/github-mark.svg';
+import linkedinLogo from './images/LinkedIn_icon.svg';
+import emailLogo from './images/envelope-svgrepo-com.svg';
 import './components.css';
 
 function GameModeDisplay(){
@@ -303,9 +306,9 @@ function GameModeDisplay(){
             </div>
             <div>
                 <footer id="footer"> 
-                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src={process.env.PUBLIC_URL + '/images/github-mark.svg'} className="footer_icon"></img></a>
-                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src="./src/components/images/LinkedIn_icon.svg" className="footer_icon"></img></a>
-                    <a href="mailto:lupiensimon@hotmail.com"><img src="./src/components/images/envelope-svgrepo-com.svg" className="footer_icon"></img></a>
+                    <a href="https://github.com/SimonProgAI/hangman_app" target="_blank"><img src={githubLogo} className="footer_icon"></img></a>
+                    <a href="https://linkedin.com/in/simon-lupien-22594235a" target="_blank"><img src={linkedinLogo} className="footer_icon"></img></a>
+                    <a href="mailto:lupiensimon@hotmail.com"><img src={emailLogo} className="footer_icon"></img></a>
                     <h3>©2025 Simon Lupien</h3>
                 </footer>
             </div>
