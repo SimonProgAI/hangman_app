@@ -182,7 +182,7 @@ function GameModeDisplay(){
     let processedWordArr = wordArr.map((letter,index)=>{
         
         if(wordArr.length!==visibilityArr.length){
-            console.log('Error, visibilityArr.length and wordArr.length do not match')
+            //console.log('Error, visibilityArr.length and wordArr.length do not match')
         }
         if (visibilityArr[index]||letter==='-'){
             //console.log(`${letter} should be revealed`)
@@ -269,7 +269,7 @@ function GameModeDisplay(){
                 <div className="button_container">
                     <div className="randomWord_div">  
                         <button onClick={handleRandomWord} disabled={isDisabled} className="randomWord_btn button">Random Word</button>
-                        <input ref={randomWordLengthRef} placeholder="letters" type="number" min="2" max="9" 
+                        <input ref={randomWordLengthRef} placeholder="2-9 letters" type="number" min="2" max="9" 
                             disabled={isDisabled} className="numOfLetters_input"/>
                         <br/>
                         
