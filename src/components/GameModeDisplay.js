@@ -8,7 +8,7 @@ import githubLogo from 'C:/Workspace/hangman_app/src/components/images/github-ma
 import linkedinLogo from 'C:/Workspace/hangman_app/src/components/images/LinkedIn_icon.svg';
 import emailLogo from 'C:/Workspace/hangman_app/src/components/images/envelope-svgrepo-com.svg';
 import './components.css';
-
+ 
 function GameModeDisplay(){
 //VARIABLES
     const pageTitleString = "HANGMAN";
