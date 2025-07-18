@@ -1,4 +1,5 @@
 HANGMAN GAME
+
 --Overview--
 A React-based Hangman game that allows users to play with random words or input their own words.
 
