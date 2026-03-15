@@ -187,7 +187,7 @@
             height: 38vh;
             border: solid 0.5vh;
             border-radius: 1em;
-            text-align: center;
+            /* text-align: center; */
         }
         .btnInput_div{
             margin: 0.5vw;
