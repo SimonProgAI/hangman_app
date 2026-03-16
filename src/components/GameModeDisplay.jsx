@@ -1,20 +1,17 @@
 import { useRef, useState, useEffect, useMemo } from "react";
-import { processedPageTitleArr } from "./PageTitle";
+import { WordManager } from "./WordManager";
 import validMsg from "../messages/validation.json";
-import uiMsg from "../messages/ui_msg.json";
-import SoundEngine from "./SoundEngine";
+import SoundEngine from "./utils/SoundEngine";
 import LetterInputDisplay from "./LetterInputDisplay";
 import HangmanStickfigure from "./HangmanStickFigure";
-import wrongInputSound1 from "C:/Workspace/hangman_app/src/components/audio/wrong-47985.mp3";
-import correctInputSound1 from "C:/Workspace/hangman_app/src/components/audio/soft-subtle-ui-pop-sfx-348820.mp3";
-import githubLogo from "C:/Workspace/hangman_app/src/components/images/github-mark.svg";
-import linkedinLogo from "C:/Workspace/hangman_app/src/components/images/LinkedIn_icon.svg";
-import emailLogo from "C:/Workspace/hangman_app/src/components/images/envelope-svgrepo-com.svg";
+import wrongInputSound1 from "../audio/wrong-47985.mp3";
+import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
+
 import "./components.css";
 
 function GameModeDisplay() {
   //VARIABLES
-  
+
   const randomWordLengthRef = useRef(0);
   const userWordRef = useRef("");
   const errMsgRef1 = useRef("");
@@ -71,9 +68,9 @@ function GameModeDisplay() {
       setErrMsg1(validMsg.tooShortRandom);
     } else if (randomWordLength > 1 && randomWordLength < 17) {
       setIsDisabled(true);
-      //const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
+      const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
       const url2 = `https://random-word-api.vercel.app/api?words=1&length=${randomWordLength}`;
-      fetch(url2)
+      fetch(url)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -255,57 +252,56 @@ function GameModeDisplay() {
   return (
     <div className="pageRenderer_div">
       <div className="top_container">
-        {/*<div className="errMsg3">{errMsg3}</div>*/}
-        <h1>{processedPageTitleArr}</h1>
-        <div className="button_container">
-          <div className="randomWord_div">
+      {/*<div className="errMsg3">{errMsg3}</div>*/}
+      <div className="button_container">
+        <div className="randomWord_div">
+          <button
+            onClick={handleRandomWord}
+            disabled={isDisabled}
+            className="randomWord_btn button"
+          >
+            Random Word
+          </button>
+          <input
+            ref={randomWordLengthRef}
+            placeholder="3-9 letters"
+            type="number"
+            min="3"
+            max="9"
+            disabled={isDisabled}
+            className="numOfLetters_input"
+          />
+          <br />
+        </div>
+        <div className="userWord_div">
+          <span>
             <button
-              onClick={handleRandomWord}
+              onClick={createUserWord}
               disabled={isDisabled}
-              className="randomWord_btn button"
+              className="userWord_btn button"
             >
-              Random Word
+              User Word
             </button>
             <input
-              ref={randomWordLengthRef}
-              placeholder="3-9 letters"
-              type="number"
-              min="3"
-              max="9"
+              type="text"
+              ref={userWordRef}
               disabled={isDisabled}
-              className="numOfLetters_input"
-            />
-            <br />
-          </div>
-          <div className="userWord_div">
-            <span>
-              <button
-                onClick={createUserWord}
-                disabled={isDisabled}
-                className="userWord_btn button"
-              >
-                User Word
-              </button>
-              <input
-                type="text"
-                ref={userWordRef}
-                disabled={isDisabled}
-                placeholder="enter a word..."
-                className="userWord_input"
-              ></input>
-            </span>
-          </div>
-          <div className="resetGame_btn_div">
-            <button onClick={handleRestart} className="resetGame_btn button">
-              Reset Game
-            </button>
-          </div>
-          <div className="errMsg">
-            <span ref={errMsgRef2}>{errMsg2}</span>
-            <span ref={errMsgRef1}>{errMsg1}</span>
-          </div>
+              placeholder="enter a word..."
+              className="userWord_input"
+            ></input>
+          </span>
+        </div>
+        <div className="resetGame_btn_div">
+          <button onClick={handleRestart} className="resetGame_btn button">
+            Reset Game
+          </button>
+        </div>
+        <div className="errMsg">
+          <span ref={errMsgRef2}>{errMsg2}</span>
+          <span ref={errMsgRef1}>{errMsg1}</span>
         </div>
       </div>
+    </div>
       <div className="middle_container">
         <div className="processedWordArr_div">{messageToDisplay()}</div>
       </div>
@@ -324,23 +320,6 @@ function GameModeDisplay() {
         <div className="hangmanStickFigure_div">
           <HangmanStickfigure count={count} />
         </div>
-      </div>
-      <div>
-        <footer id="footer">
-          <a href="https://github.com/SimonProgAI/hangman_app" target="_blank">
-            <img src={githubLogo} className="footer_icon"></img>
-          </a>
-          <a
-            href="https://linkedin.com/in/simon-lupien-22594235a"
-            target="_blank"
-          >
-            <img src={linkedinLogo} className="footer_icon"></img>
-          </a>
-          <a href="mailto:lupiensimon@hotmail.com">
-            <img src={emailLogo} className="footer_icon"></img>
-          </a>
-          <h3>©2025 Simon Lupien</h3>
-        </footer>
       </div>
     </div>
   );

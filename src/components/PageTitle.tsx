@@ -1,11 +1,21 @@
-import uiMsg from "../messages/ui_msg.json";
-const pageTitleString: string = uiMsg.pageTitle;
-const pageTitleArr: string [] = pageTitleString.split("");
+import ui_text from "../messages/ui_text.json";
+import "./components.css";
 
-export const processedPageTitleArr = pageTitleArr.map((letter, index) => {
-    return (
-      <span className="title" key={index}>
-        {letter}
-      </span>
-    );
-  });
+const pageTitleString: string = ui_text.pageTitle;
+const pageTitleArr: string[] = pageTitleString.split("");
+
+const title = pageTitleArr.map((letter, index) => {
+  return (
+    <span className="title" key={index}>
+      {letter}
+    </span>
+  );
+});
+
+export function PageTitle() {
+  return (
+    <div className="top_container">
+      <h1>{title}</h1>
+    </div>
+  );
+}

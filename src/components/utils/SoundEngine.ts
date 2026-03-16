@@ -1,6 +1,6 @@
 const SoundEngine = () =>{ 
 
-    const loadSoundFx = (src) =>{
+    function loadSoundFx (src: string): HTMLAudioElement{
         try {
             let soundFx = new Audio(src);
             return soundFx
@@ -10,7 +10,7 @@ const SoundEngine = () =>{
         }
     }
 
-    const playSoundFx = (soundFx) =>{
+    function playSoundFx (soundFx: HTMLAudioElement): void{
         try {
             if(soundFx){
             soundFx.play()
