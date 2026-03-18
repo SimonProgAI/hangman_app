@@ -1,5 +1,7 @@
 import "./components.css";
-const HangmanStickfigure = ({ count }) => {
+import styles from "./HangmanStickFigure.module.css";
+
+export const HangmanStickfigure = ({ count }) => {
   const visibleColor = "white";
   const hiddenColor = "transparent";
   /* const bodyPartsColorsArr = [
@@ -15,6 +17,7 @@ const HangmanStickfigure = ({ count }) => {
     
   } */
 
+
   const headColor0 = count > 0 ? visibleColor : hiddenColor;
   const torsoColor1 = count > 1 ? visibleColor : hiddenColor;
   const leftArmColor2 = count > 2 ? visibleColor : hiddenColor;
@@ -23,7 +26,7 @@ const HangmanStickfigure = ({ count }) => {
   const rightLegColor5 = count > 5 ? visibleColor : hiddenColor;
 
   return (
-    <div className="gallowBackground_div">
+    <div className={styles.hangmanStickFigure_div}>
       <svg viewBox="0 0 300 250" width="100%" height="100%">
         <circle cx="140" cy="80" r="20" style={{ fill: headColor0 }} />
         <line
@@ -121,4 +124,3 @@ const HangmanStickfigure = ({ count }) => {
   );
 };
 //<line x1="140" y1="25" x2="140" y2="60 " style={{stroke: 'brown', strokeWidth: '3'}}/> the "rope" was not working on smallerscreens
-export default HangmanStickfigure;

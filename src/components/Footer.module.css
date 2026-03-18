@@ -1,0 +1,14 @@
+.footer_icon{
+        padding: 0.5em 0.3em;
+        width: 5vh;
+        height: 5vh;
+    }
+    .footer>h3{
+        font-weight: 600;
+        margin: 1.5vh;
+    }
+    .footer{
+        display: flex;
+        justify-content: center;
+        grid-area: footer;
+} 

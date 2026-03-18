@@ -1,8 +1,9 @@
+import { keyboardArr } from "./utils/keyboardArr";
+import { Button } from "./ui_components/Button";
 import "./components.css";
-import { keyboardArr} from "./utils/keyboardArr";
+import styles from "./LetterInputDisplay.module.css";
 
-
-const LetterInputDisplay = ({
+export const LetterInputDisplay = ({
   word,
   handleUserInput,
   wrongGuessesArr,
@@ -11,12 +12,11 @@ const LetterInputDisplay = ({
   hasLost,
 }) => {
   
-
-  let letterColor;
-
+let letterColor;
   const btnInput = keyboardArr.map((rowArr, index) => {
-    const btnRows1_3 = rowArr.map((btn, index) => {
-      function keyboardStatus() {
+    const btnRows1_3 = rowArr.map((btn) => {
+      function keyState() {
+        
         if (word === "" || hasLost === true || hasWon === true) {
           return true;
         } else if (wrongGuessesArr.includes(btn.letter)) {
@@ -32,26 +32,23 @@ const LetterInputDisplay = ({
       }
       return (
         <span key={btn.id}>
-          <button
+          <Button
             onClick={() => handleUserInput(btn.letter)}
-            disabled={keyboardStatus()}
+            disabled={keyState()}
             style={letterColor}
-            className="indv_btns"
-          >
-            {btn.letter}
-          </button>
+            className={styles.indv_btns}
+            children={btn.letter}
+          />
         </span>
       );
     });
 
     return (
-      <div key={index} className="btnRows_div">
+      <div key={index} className={styles.btnRows_div}>
         {btnRows1_3}
       </div>
     );
   });
 
-  return <div className="btnInput_div">{btnInput}</div>;
+  return <div className={styles.btnInput_div}>{btnInput}</div>;
 };
-
-export default LetterInputDisplay;

@@ -1,15 +1,18 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { WordManager } from "./WordManager";
+import { Button } from "./ui_components/Button";
 import validMsg from "../messages/validation.json";
 import SoundEngine from "./utils/SoundEngine";
-import LetterInputDisplay from "./LetterInputDisplay";
-import HangmanStickfigure from "./HangmanStickFigure";
+import { LetterInputDisplay } from "./LetterInputDisplay";
+import { HangmanStickfigure } from "./HangmanStickFigure";
 import wrongInputSound1 from "../audio/wrong-47985.mp3";
 import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
+import { hasOnlyLettersAndHyphen } from "./utils/hasOnlyLettersAndHyphens";
+import { RandomWord } from "./RandomWord";
 
-import "./components.css";
+/* import "./components.css"; */
 
-function GameModeDisplay() {
+export function GameplayLoop() {
   //VARIABLES
 
   const randomWordLengthRef = useRef(0);
@@ -35,9 +38,6 @@ function GameModeDisplay() {
   //USER_WORD
   const createUserWord = () => {
     const userWord = userWordRef.current.value;
-    function hasOnlyLettersAndHyphen(word) {
-      return /^[a-zA-Z-]+$/.test(word);
-    }
     if (userWord.length < 2 || userWord.length > 17) {
       setErrMsg2(validMsg.tooShortUser);
     } else if (userWord.includes("--")) {
@@ -252,77 +252,58 @@ function GameModeDisplay() {
   return (
     <div className="pageRenderer_div">
       <div className="top_container">
-      {/*<div className="errMsg3">{errMsg3}</div>*/}
-      <div className="button_container">
-        <div className="randomWord_div">
-          <button
-            onClick={handleRandomWord}
-            disabled={isDisabled}
-            className="randomWord_btn button"
-          >
-            Random Word
-          </button>
-          <input
-            ref={randomWordLengthRef}
-            placeholder="3-9 letters"
-            type="number"
-            min="3"
-            max="9"
-            disabled={isDisabled}
-            className="numOfLetters_input"
+        {/*<div className="errMsg3">{errMsg3}</div>*/}
+
+        <div className="button_container">
+          <RandomWord
+            handleRandomWord={handleRandomWord}
+            isDisabled={isDisabled}
+            randomWordLengthRef={randomWordLengthRef}
           />
-          <br />
-        </div>
-        <div className="userWord_div">
-          <span>
-            <button
-              onClick={createUserWord}
-              disabled={isDisabled}
-              className="userWord_btn button"
-            >
-              User Word
+          <div className="userWord_div">
+            <span>
+              <button
+                onClick={createUserWord}
+                disabled={isDisabled}
+                className="userWord_btn button"
+              >
+                User Word
+              </button>
+              <input
+                type="text"
+                ref={userWordRef}
+                disabled={isDisabled}
+                placeholder="enter a word..."
+                className="userWord_input"
+              ></input>
+            </span>
+          </div>
+          <div className="resetGame_btn_div">
+            <button onClick={handleRestart} className="resetGame_btn button">
+              Reset Game
             </button>
-            <input
-              type="text"
-              ref={userWordRef}
-              disabled={isDisabled}
-              placeholder="enter a word..."
-              className="userWord_input"
-            ></input>
-          </span>
-        </div>
-        <div className="resetGame_btn_div">
-          <button onClick={handleRestart} className="resetGame_btn button">
-            Reset Game
-          </button>
-        </div>
-        <div className="errMsg">
-          <span ref={errMsgRef2}>{errMsg2}</span>
-          <span ref={errMsgRef1}>{errMsg1}</span>
+          </div>
+          <div className="errMsg">
+            <span ref={errMsgRef2}>{errMsg2}</span>
+            <span ref={errMsgRef1}>{errMsg1}</span>
+          </div>
         </div>
       </div>
-    </div>
       <div className="middle_container">
         <div className="processedWordArr_div">{messageToDisplay()}</div>
       </div>
       <div className="bottom_container">
-        <div className="letterInputDisplay_div">
-          <LetterInputDisplay
-            word={word}
-            handleUserInput={handleUserInput}
-            wrongGuessesArr={wrongGuessesArr}
-            guessedLettersArr={guessedLettersArr}
-            userInput={userInput}
-            hasWon={hasWon}
-            hasLost={hasLost}
-          />
-        </div>
-        <div className="hangmanStickFigure_div">
-          <HangmanStickfigure count={count} />
-        </div>
+        <LetterInputDisplay
+          word={word}
+          handleUserInput={handleUserInput}
+          wrongGuessesArr={wrongGuessesArr}
+          guessedLettersArr={guessedLettersArr}
+          userInput={userInput}
+          hasWon={hasWon}
+          hasLost={hasLost}
+        />
+        <HangmanStickfigure count={count} />
       </div>
     </div>
   );
 }
-
-export default GameModeDisplay;

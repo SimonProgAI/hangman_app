@@ -1,0 +1,13 @@
+.hangmanStickFigure_div {
+  background-color: rgb(242, 151, 151);
+  width: 35vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38vh;
+  border: solid 0.5vh;
+  border-radius: 1em;
+}
+.hangmanStickFigure_div > svg {
+  width: 20vw;
+}

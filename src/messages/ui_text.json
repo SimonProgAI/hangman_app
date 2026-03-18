@@ -1,4 +1,8 @@
 {
     "pageTitle": "HANGMAN",
-    "copyright": "©2025 Simon Lupien"
+    "copyright": "©2025 Simon Lupien",
+    "randomWordBtn": "Random Word",
+    "userWordBtn": "User Word",
+    "resetGameBtn": "Reset Game",
+    "randomWordPlaceholder": "3-9 letters"
 }

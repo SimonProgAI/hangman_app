@@ -1,14 +1,17 @@
 interface Props {
-  buttonText: string,
-  className: string,
-  disabled: boolean,
-  onClick: () => void
+  className: string;
+  disabled?: boolean;
+  onClick: () => void;
+  children:React.ReactNode;
+  style?: string;
 }
 
-export const Button:React.FC<Props> = ({ buttonText, className, disabled, onClick }) => {
+export const Button: React.FC<Props> = ({ className, disabled, onClick, children }) => {
   return (
-    <button className={className} disabled={disabled} onClick={onClick}>
-      {buttonText}
-    </button>
+    <button
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+    >{children}</button>
   );
-}
+};

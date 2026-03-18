@@ -10,16 +10,7 @@
     .top_container{
         grid-area: top;      
     }
-    .title{
-        border-bottom: solid rgb(0, 0, 0);
-        border-bottom-width: 0.5vw ;
-        width: 3vw;
-        display:inline-block;
-        margin: 0vh 0.5vw;
-        user-select: none;
-        font-size: 3vw ;
-        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    }
+    
     .top_container>h1{
         text-align: center;
     }
@@ -41,12 +32,7 @@
         width:100%;
         
     }
-    #footer{
-        display: flex;
-        justify-content: center;
-        grid-area: footer;
-}
-
+    
 /*TOP_CONTAINER*/
     .button{
         color: black;
@@ -182,61 +168,9 @@
         }
 
 /*BOTTOM_CONTAINER*/
-    /*LetterInputDisplay*/
-        .btnInput_div, .hangmanStickFigure_div{
-            height: 38vh;
-            border: solid 0.5vh;
-            border-radius: 1em;
-            /* text-align: center; */
-        }
-        .btnInput_div{
-            margin: 0.5vw;
-            background-color: rgb(118, 199, 252);
-            width: 60vw
-        }
-        .btnRows_div{
-            display: flex;
-            justify-content: center;
-            margin: 3.5vh;
-            
-        }
-        .indv_btns{
-            width:5vw;
-            height:7vh;
-            font-size: 5vh;
-            margin:0.1vh;
-            border-radius: 0.2em;
-        }
-        .indv_btns:hover{
-            cursor: pointer;
-            color:white !important;
-            background-color: #008CBA;
-        }
-    /*HangmanStickFigure*/
     
-        .hangmanStickFigure_div {
-            background-color: rgb(242, 151, 151);
-            width: 35vw;
-            display: flex; /* Add this */
-            justify-content: center; /* Add this */
-            align-items: center; /* Add this */
-        }
-        .gallowBackground_div>svg{
-            width: 20vw;
-        }
+    
 
-/*FOOTER*/
-    .footer_icon{
-        padding: 0.5em 0.3em;
-        width: 5vh;
-        height: 5vh;
-    }
-    #footer>h3{
-        font-weight: 600;
-        margin: 1.5vh;
-    }
-    
-    
 @media only screen and (max-width: 768px) {
  
     .pageRenderer_div {

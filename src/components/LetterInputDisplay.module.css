@@ -1,0 +1,26 @@
+.btnInput_div {
+  height: 38vh;
+  border: solid 0.5vh;
+  border-radius: 1em;
+  /* text-align: center; */
+  margin: 0.5vw;
+  background-color: rgb(118, 199, 252);
+  width: 60vw;
+}
+.btnRows_div {
+  display: flex;
+  justify-content: center;
+  margin: 3.5vh;
+}
+.indv_btns {
+  width: 5vw;
+  height: 7vh;
+  font-size: 5vh;
+  margin: 0.1vh;
+  border-radius: 0.2em;
+}
+.indv_btns:hover {
+  cursor: pointer;
+  color: white !important;
+  background-color: #008cba;
+}
