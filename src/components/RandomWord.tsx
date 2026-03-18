@@ -1,22 +1,18 @@
 import { Button } from "./ui_components/Button";
 import ui_text from "../messages/ui_text.json";
+import { WordCreationProps } from "./TS Interfaces/WordCreationProps";
 
-interface WordCreationProps{
-    handleRandomWord: ()=> void;
-    isDisabled: boolean;
-    randomWordLengthRef: React.RefObject<HTMLInputElement>;
-}
-export function RandomWord({handleRandomWord,isDisabled,randomWordLengthRef}: WordCreationProps){
+export function RandomWord({onClickFunction,isDisabled,wordRef}: WordCreationProps){
     return(
         <div className="randomWord_div">
         <Button
           className={"randomWord_btn button"}
-          onClick={handleRandomWord}
+          onClick={onClickFunction}
           disabled={isDisabled}
           children={ui_text.randomWordBtn}
         />
         <input
-          ref={randomWordLengthRef}
+          ref={wordRef}
           placeholder={ui_text.randomWordPlaceholder}
           type="number"
           min="3"

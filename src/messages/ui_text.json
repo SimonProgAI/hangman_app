@@ -4,5 +4,6 @@
     "randomWordBtn": "Random Word",
     "userWordBtn": "User Word",
     "resetGameBtn": "Reset Game",
-    "randomWordPlaceholder": "3-9 letters"
+    "randomWordPlaceholder": "3-9 letters",
+    "userWordPlaceholder": "enter a word..."
 }

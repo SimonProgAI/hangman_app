@@ -1,12 +1,6 @@
-interface Props {
-  className: string;
-  disabled?: boolean;
-  onClick: () => void;
-  children:React.ReactNode;
-  style?: string;
-}
+import { ButtonProps } from "../TS Interfaces/ButtonProps";
 
-export const Button: React.FC<Props> = ({ className, disabled, onClick, children }) => {
+export function Button({ className, disabled, onClick, children }: ButtonProps){
   return (
     <button
       className={className}

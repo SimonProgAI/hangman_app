@@ -1,6 +1,4 @@
 import { useRef, useState, useEffect, useMemo } from "react";
-import { WordManager } from "./WordManager";
-import { Button } from "./ui_components/Button";
 import validMsg from "../messages/validation.json";
 import SoundEngine from "./utils/SoundEngine";
 import { LetterInputDisplay } from "./LetterInputDisplay";
@@ -9,6 +7,9 @@ import wrongInputSound1 from "../audio/wrong-47985.mp3";
 import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
 import { hasOnlyLettersAndHyphen } from "./utils/hasOnlyLettersAndHyphens";
 import { RandomWord } from "./RandomWord";
+import { UserWord } from "./UserWord";
+import { ResetGame } from "./ResetGame";
+import { ErrMsgDisplay } from "./ErrMsgDisplay";
 
 /* import "./components.css"; */
 
@@ -17,8 +18,7 @@ export function GameplayLoop() {
 
   const randomWordLengthRef = useRef(0);
   const userWordRef = useRef("");
-  const errMsgRef1 = useRef("");
-  const errMsgRef2 = useRef("");
+
   const [randomWord, setRandomWord] = useState("");
   const [userWord, setUserWord] = useState("");
   const [errMsg1, setErrMsg1] = useState("");
@@ -253,40 +253,19 @@ export function GameplayLoop() {
     <div className="pageRenderer_div">
       <div className="top_container">
         {/*<div className="errMsg3">{errMsg3}</div>*/}
-
         <div className="button_container">
           <RandomWord
-            handleRandomWord={handleRandomWord}
+            onClickFunction={handleRandomWord}
             isDisabled={isDisabled}
-            randomWordLengthRef={randomWordLengthRef}
+            wordRef={randomWordLengthRef}
           />
-          <div className="userWord_div">
-            <span>
-              <button
-                onClick={createUserWord}
-                disabled={isDisabled}
-                className="userWord_btn button"
-              >
-                User Word
-              </button>
-              <input
-                type="text"
-                ref={userWordRef}
-                disabled={isDisabled}
-                placeholder="enter a word..."
-                className="userWord_input"
-              ></input>
-            </span>
-          </div>
-          <div className="resetGame_btn_div">
-            <button onClick={handleRestart} className="resetGame_btn button">
-              Reset Game
-            </button>
-          </div>
-          <div className="errMsg">
-            <span ref={errMsgRef2}>{errMsg2}</span>
-            <span ref={errMsgRef1}>{errMsg1}</span>
-          </div>
+          <UserWord
+            onClickFunction={createUserWord}
+            isDisabled={isDisabled}
+            wordRef={userWordRef}
+          />
+          <ResetGame onClickFunction={handleRestart} />
+          <ErrMsgDisplay errMsg1={errMsg1} errMsg2={errMsg2} />
         </div>
       </div>
       <div className="middle_container">

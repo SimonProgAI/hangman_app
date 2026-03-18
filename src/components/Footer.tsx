@@ -3,8 +3,8 @@ import linkedinLogo from "../images/LinkedIn_icon.svg";
 import emailLogo from "../images/envelope-svgrepo-com.svg";
 import ui_text from "../messages/ui_text.json";
 import styles from "./Footer.module.css";
-type FooterObj = { link: string; logo: string };
-type FooterObjArr = FooterObj[];
+import { FooterObjArr, FooterObj } from "./TS Interfaces/FooterObj";
+
 
 const githubLink: string = "https://github.com/SimonProgAI/hangman_app";
 const linkedinLink: string = "https://linkedin.com/in/simon-lupien-22594235a";
