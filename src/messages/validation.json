@@ -4,5 +4,6 @@
   "noSpaces": "User Word cannot contain spaces.",
   "hyphenEdges": "User Word cannot begin or end with a hyphen.",
   "invalidChars": "User Word must contain letters and no more than one hyphen.",
-  "tooShortRandom": "Random Word must be between 2 and 9 characters."
+  "tooShortRandom": "Random Word must be between 2 and 9 characters.",
+  "failedFetch": "Could not fetch random word."
 }

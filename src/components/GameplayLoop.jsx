@@ -10,17 +10,15 @@ import { RandomWord } from "./RandomWord";
 import { UserWord } from "./UserWord";
 import { ResetGame } from "./ResetGame";
 import { ErrMsgDisplay } from "./ErrMsgDisplay";
+import { randomWordApiCall } from "./utils/randomWordApiCall";
 
-/* import "./components.css"; */
+import "./components.css";
 
 export function GameplayLoop() {
-  //VARIABLES
-
   const randomWordLengthRef = useRef(0);
   const userWordRef = useRef("");
-
-  const [randomWord, setRandomWord] = useState("");
-  const [userWord, setUserWord] = useState("");
+  // const [randomWord, setRandomWord] = useState("");
+  // const [userWord, setUserWord] = useState("");
   const [errMsg1, setErrMsg1] = useState("");
   const [errMsg2, setErrMsg2] = useState("");
   //const [errMsg3, setErrMsg3] = useState("");
@@ -49,7 +47,7 @@ export function GameplayLoop() {
     } else if (!hasOnlyLettersAndHyphen(userWord)) {
       setErrMsg2(validMsg.invalidChars);
     } else if (hasOnlyLettersAndHyphen(userWord)) {
-      setUserWord(userWord);
+      // setUserWord(userWord);
       setWord(userWord.toUpperCase());
       setIsDisabled(true);
       setGuessedLettersArr([...guessedLettersArr, "-"]);
@@ -61,31 +59,23 @@ export function GameplayLoop() {
   };
   //console.log(`userWord is set to ${userWord}`);
 
-  //RANDOM_WORD_API
-  const handleRandomWord = () => {
+  //RANDOM_WORD
+  const handleRandomWord = async () => {
     const randomWordLength = Number(randomWordLengthRef.current.value);
     if (randomWordLength < 3 || randomWordLength > 9) {
       setErrMsg1(validMsg.tooShortRandom);
-    } else if (randomWordLength > 1 && randomWordLength < 17) {
-      setIsDisabled(true);
-      const url = `https://random-word-api.herokuapp.com/word?length=${randomWordLength}`;
-      const url2 = `https://random-word-api.vercel.app/api?words=1&length=${randomWordLength}`;
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const randomWord = data[0];
-          setRandomWord(randomWord);
-          setWord(randomWord.toUpperCase());
-          setErrMsg1("");
-          setErrMsg2("");
-        })
-        .catch((error) => alert("Error fetching data:", error));
+      return;
     }
+    setIsDisabled(true);
+    const fetchedWord = await randomWordApiCall(randomWordLength);
+    if (!fetchedWord) {
+      setErrMsg1(validMsg.failedFetch);
+    }
+
+    // setRandomWord(fetchedWord);
+    setWord(fetchedWord.toUpperCase());
+    setErrMsg1("");
+    setErrMsg2("");
     //console.log('function handleRandomWord called')
   };
   //console.log(`randomWord is set to ${randomWord}`);
@@ -98,7 +88,7 @@ export function GameplayLoop() {
       return word.split("");
     }
   }, [word]);
-  //console.log('wordArr is', wordArr);
+  // console.log("wordArr is", wordArr);
 
   //USER_INPUT
   const handleUserInput = (letter, index) => {
@@ -212,7 +202,6 @@ export function GameplayLoop() {
 
     if (storedGameState !== null) {
       const gameState = JSON.parse(storedGameState);
-
       setWord(gameState.word);
       setIsDisabled(gameState.isDisabled);
       setCount(gameState.count);
