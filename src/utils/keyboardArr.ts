@@ -1,6 +1,8 @@
-
-import { KeyButton } from "../TS Interfaces/KeyButton";
-
+export interface KeyButton {
+  letter: string;
+  disabled: boolean;
+  key: number;
+}
 export const LETTERS = [
   "Q",
   "W",
@@ -29,9 +31,12 @@ export const LETTERS = [
   "N",
   "M",
 ];
-const rowLensArr: number[] = [10, 9, 7];
-function keysRowArr(arr: string[],startIdx: number, rowLen: number):KeyButton[] {
-  
+
+function keysRowArr(
+  arr: string[],
+  startIdx: number,
+  rowLen: number,
+): KeyButton[] {
   return arr.slice(startIdx, rowLen).map((ltr, i) => ({
     letter: ltr,
     disabled: false,
@@ -39,21 +44,8 @@ function keysRowArr(arr: string[],startIdx: number, rowLen: number):KeyButton[] 
   }));
 }
 
-/* function keyboardBuilder(letterArr: string[], rowLenArr: number[]){
-  
-  let rowOfLetters = letterArr.map((ltr: string, index: number)=>({
-    letter: ltr, disabled: false, key: index 
-  })
-  )
-
-  return rowOfLetters;
-} */
-
-/* console.log(keyboardBuilder(LETTERS, rowLensArr)) */
-
 export const keyboardArr: KeyButton[][] = [
   keysRowArr(LETTERS, 0, 10), // Q-P
   keysRowArr(LETTERS, 10, 19), // A-L
   keysRowArr(LETTERS, 19, 26), // Z-M
 ];
-

@@ -1,12 +1,13 @@
-import { Button } from "./ui_components/Button";
-import ui_text from "../messages/ui_text.json";
-import { WordCreationProps } from "./TS Interfaces/WordCreationProps";
+import { Button } from "../reusable ui_components/Button";
+import ui_text from "../../messages/ui_text.json";
+import { WordCreationProps } from "../../TS Interfaces/WordCreationProps";
+import styles from "./WordCreationStyle.module.css";
 
 export function RandomWord({onClickFunction,isDisabled,wordRef}: WordCreationProps){
     return(
-        <div className="randomWord_div">
+        <div className={styles.randomWord_div}>
         <Button
-          className={"randomWord_btn button"}
+          className={`${styles.randomWord_btn} ${styles. button}`}
           onClick={onClickFunction}
           disabled={isDisabled}
           children={ui_text.randomWordBtn}
@@ -18,7 +19,7 @@ export function RandomWord({onClickFunction,isDisabled,wordRef}: WordCreationPro
           min="3"
           max="9"
           disabled={isDisabled}
-          className="numOfLetters_input"
+          className={styles.numOfLetters_input}
         />
         <br />
       </div>

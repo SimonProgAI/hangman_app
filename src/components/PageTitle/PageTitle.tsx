@@ -1,4 +1,4 @@
-import ui_text from "../messages/ui_text.json";
+import ui_text from "../../messages/ui_text.json";
 import styles from "./PageTitle.module.css";
 
 const pageTitleString: string = ui_text.pageTitle;

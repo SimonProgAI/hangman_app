@@ -1,23 +1,9 @@
-import "./components.css";
+import "../components.css";
 import styles from "./HangmanStickFigure.module.css";
 
 export const HangmanStickfigure = ({ count }) => {
   const visibleColor = "white";
   const hiddenColor = "transparent";
-  /* const bodyPartsColorsArr = [
-    headColor0,
-    torsoColor1,
-    leftArmColor2,
-    rightArmColor3,
-    leftLegColor4,
-    rightLegColor5,
-  ];
-  
-  function colorDisplay(arr, count){
-    
-  } */
-
-
   const headColor0 = count > 0 ? visibleColor : hiddenColor;
   const torsoColor1 = count > 1 ? visibleColor : hiddenColor;
   const leftArmColor2 = count > 2 ? visibleColor : hiddenColor;

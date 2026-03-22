@@ -1,27 +1,25 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo} from "react";
 import validMsg from "../messages/validation.json";
-import SoundEngine from "./utils/SoundEngine";
-import { LetterInputDisplay } from "./LetterInputDisplay";
-import { HangmanStickfigure } from "./HangmanStickFigure";
+import SoundEngine from "../utils/SoundEngine";
+import { LetterInputDisplay } from "./LetterInputDisplay/LetterInputDisplay";
+import { HangmanStickfigure } from "./HangmanStickFigure/HangmanStickFigure";
 import wrongInputSound1 from "../audio/wrong-47985.mp3";
 import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
-import { hasOnlyLettersAndHyphen } from "./utils/hasOnlyLettersAndHyphens";
-import { RandomWord } from "./RandomWord";
-import { UserWord } from "./UserWord";
-import { ResetGame } from "./ResetGame";
-import { ErrMsgDisplay } from "./ErrMsgDisplay";
-import { randomWordApiCall } from "./utils/randomWordApiCall";
+import { hasOnlyLettersAndHyphen } from "../utils/hasOnlyLettersAndHyphens";
+import { RandomWord } from "./WordCreation/RandomWord";
+import { UserWord } from "./WordCreation/UserWord";
+import { ResetGame } from "./WordCreation/ResetGame";
+import { ErrMsgDisplay } from "./ErrMsgDisplay/ErrMsgDisplay";
+import { randomWordApiCall } from "../utils/randomWordApiCall";
+import { GameOutput } from "./GameOutput/GameOutput";
 
-import "./components.css";
+/* import "./components.css"; */
 
 export function GameplayLoop() {
   const randomWordLengthRef = useRef(0);
   const userWordRef = useRef("");
-  // const [randomWord, setRandomWord] = useState("");
-  // const [userWord, setUserWord] = useState("");
   const [errMsg1, setErrMsg1] = useState("");
   const [errMsg2, setErrMsg2] = useState("");
-  //const [errMsg3, setErrMsg3] = useState("");
   const [word, setWord] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [userInput, setUserInput] = useState("");
@@ -47,7 +45,6 @@ export function GameplayLoop() {
     } else if (!hasOnlyLettersAndHyphen(userWord)) {
       setErrMsg2(validMsg.invalidChars);
     } else if (hasOnlyLettersAndHyphen(userWord)) {
-      // setUserWord(userWord);
       setWord(userWord.toUpperCase());
       setIsDisabled(true);
       setGuessedLettersArr([...guessedLettersArr, "-"]);
@@ -71,8 +68,6 @@ export function GameplayLoop() {
     if (!fetchedWord) {
       setErrMsg1(validMsg.failedFetch);
     }
-
-    // setRandomWord(fetchedWord);
     setWord(fetchedWord.toUpperCase());
     setErrMsg1("");
     setErrMsg2("");
@@ -94,7 +89,6 @@ export function GameplayLoop() {
   const handleUserInput = (letter, index) => {
     setUserInput(letter);
     const upperCaseLetters = letter.toUpperCase();
-
     if (!wordArr.includes(upperCaseLetters)) {
       setCount(count + 1);
       setWrongGuessesArr([...wrongGuessesArr, upperCaseLetters]);
@@ -113,67 +107,7 @@ export function GameplayLoop() {
     ? true
     : false;
   const hasLost = count === 6 ? true : false;
-  const won_lossMsg = () => {
-    if (hasWon === true && guessedLettersArr.length !== 0) {
-      return (
-        <div className="hasWon_msg">
-          Correct! The word was "{wordArr.join("")}".
-        </div>
-      );
-    } else if (hasLost === true) {
-      return (
-        <div className="hasLost_msg">
-          Wrong! The word was "{wordArr.join("")}".
-        </div>
-      );
-    }
-  };
 
-  //PROCESSED_WORD_DISPLAY
-  useEffect(() => {
-    let tempVisibilityArr = [];
-    wordArr.forEach((letter, index) => {
-      if (guessedLettersArr.includes(letter)) {
-        //console.log(`Letter ${letter} at index ${index} is revealed`);
-        tempVisibilityArr.push(true);
-      } else {
-        //console.log(`Letter ${letter} at index ${index} is hidden`);
-        tempVisibilityArr.push(false);
-      }
-    });
-    setVisibilityArr(tempVisibilityArr);
-  }, [wordArr, userInput]);
-  //console.log('visibilityArr:', visibilityArr);
-
-  let processedWordArr = wordArr.map((letter, index) => {
-    if (wordArr.length !== visibilityArr.length) {
-      //console.log('Error, visibilityArr.length and wordArr.length do not match')
-    }
-    if (visibilityArr[index] || letter === "-") {
-      //console.log(`${letter} should be revealed`)
-      return (
-        <span key={index} className="letter_display">
-          {letter}
-        </span>
-      );
-    }
-    if (!visibilityArr[index]) {
-      //console.log(`${letter} should be hidden`)
-      return (
-        <span key={index} className="letter_display" id="hidden_letter">
-          {letter}
-        </span>
-      );
-    }
-  });
-  //MESSAGE_TO_DISPLAY
-  const messageToDisplay = () => {
-    if (hasWon || hasLost) {
-      return won_lossMsg();
-    } else {
-      return processedWordArr;
-    }
-  };
   //SESSION_STORAGE
   useEffect(() => {
     if (word && word.length > 0) {
@@ -199,7 +133,6 @@ export function GameplayLoop() {
 
   useEffect(() => {
     const storedGameState = sessionStorage.getItem("gameState");
-
     if (storedGameState !== null) {
       const gameState = JSON.parse(storedGameState);
       setWord(gameState.word);
@@ -232,7 +165,6 @@ export function GameplayLoop() {
     setVisibilityArr([]);
     setErrMsg1("");
     setErrMsg2("");
-    //setErrMsg3("");
     randomWordLengthRef.current.value = "";
     //console.log(sessionStorage)
   };
@@ -241,7 +173,6 @@ export function GameplayLoop() {
   return (
     <div className="pageRenderer_div">
       <div className="top_container">
-        {/*<div className="errMsg3">{errMsg3}</div>*/}
         <div className="button_container">
           <RandomWord
             onClickFunction={handleRandomWord}
@@ -258,7 +189,14 @@ export function GameplayLoop() {
         </div>
       </div>
       <div className="middle_container">
-        <div className="processedWordArr_div">{messageToDisplay()}</div>
+        <GameOutput
+          wordArr={wordArr}
+          guessedLettersArr={guessedLettersArr}
+          count={count}
+          userInput={userInput}
+          hasWon={hasWon}
+          hasLost={hasLost}
+        />
       </div>
       <div className="bottom_container">
         <LetterInputDisplay

@@ -1,7 +1,7 @@
 
 import {GameplayLoop} from './components/GameplayLoop';
-import { Footer } from './components/Footer';
-import { PageTitle } from './components/PageTitle';
+import { Footer } from './components/Footer/Footer';
+import { PageTitle } from './components/PageTitle/PageTitle';
 import "./components/components.css";
 function App() {
 

@@ -1,19 +1,20 @@
-import { Button } from "./ui_components/Button";
-import ui_text from "../messages/ui_text.json";
-import { WordCreationProps } from "./TS Interfaces/WordCreationProps";
-
+import { Button } from "../reusable ui_components/Button";
+import ui_text from "../../messages/ui_text.json";
+import { WordCreationProps } from "../../TS Interfaces/WordCreationProps";
+import styles from "./WordCreationStyle.module.css";
+// import "./components.css";
 export function UserWord({
   onClickFunction,
   isDisabled,
   wordRef,
 }: WordCreationProps) {
   return (
-    <div className="userWord_div">
+    <div className={styles.userWord_div}>
       <span>
         <Button
           onClick={onClickFunction}
           disabled={isDisabled}
-          className={"userWord_btn button"}
+          className={`${styles.userWord_btn} ${styles.button}`}
           children={ui_text.userWordBtn}
         />
         <input
@@ -21,7 +22,7 @@ export function UserWord({
           ref={wordRef}
           disabled={isDisabled}
           placeholder={ui_text.userWordPlaceholder}
-          className={"userWord_input"}
+          className={styles.userWord_input}
         ></input>
       </span>
     </div>
