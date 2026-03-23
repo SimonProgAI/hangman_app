@@ -1,19 +1,24 @@
-import { useRef, useState, useEffect, useMemo} from "react";
-import validMsg from "../messages/validation.json";
+// 1. React
+import { useRef, useState, useEffect, useMemo } from "react";
+// 2. Project logic / utils
+import { randomWordApiCall } from "../utils/randomWordApiCall";
 import SoundEngine from "../utils/SoundEngine";
+import { hasOnlyLettersAndHyphen } from "../utils/hasOnlyLettersAndHyphens";
+// 3. Components
 import { LetterInputDisplay } from "./LetterInputDisplay/LetterInputDisplay";
 import { HangmanStickfigure } from "./HangmanStickFigure/HangmanStickFigure";
-import wrongInputSound1 from "../audio/wrong-47985.mp3";
-import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
-import { hasOnlyLettersAndHyphen } from "../utils/hasOnlyLettersAndHyphens";
 import { RandomWord } from "./WordCreation/RandomWord";
 import { UserWord } from "./WordCreation/UserWord";
 import { ResetGame } from "./WordCreation/ResetGame";
 import { ErrMsgDisplay } from "./ErrMsgDisplay/ErrMsgDisplay";
-import { randomWordApiCall } from "../utils/randomWordApiCall";
 import { GameOutput } from "./GameOutput/GameOutput";
-
-/* import "./components.css"; */
+// 4. Messages / content
+import validMsg from "../messages/validation.json";
+// 5. Assets
+import wrongInputSound1 from "../audio/wrong-47985.mp3";
+import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
+// 6. Styles
+import styles from "./GameplayLoop.module.css";
 
 export function GameplayLoop() {
   const randomWordLengthRef = useRef(0);
@@ -97,9 +102,9 @@ export function GameplayLoop() {
       setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]);
       playSoundFx(correctInputSound);
     }
-    //console.log('guessedLettersArr:', guessedLettersArr)
-    //console.log(`count is ${count+1}`);
-    //console.log(`userInput: ${letter}`);
+      //console.log('guessedLettersArr:', guessedLettersArr)
+      //console.log(`count is ${count+1}`);
+      //console.log(`userInput: ${letter}`);
   };
 
   //HASWON/HASLOST
@@ -171,9 +176,9 @@ export function GameplayLoop() {
 
   //FINAL_RENDERER
   return (
-    <div className="pageRenderer_div">
-      <div className="top_container">
-        <div className="button_container">
+    <div className={styles.pageRenderer_div}>
+      <div className={styles.top_container}>
+        <div className={styles.button_container}>
           <RandomWord
             onClickFunction={handleRandomWord}
             isDisabled={isDisabled}
@@ -188,7 +193,7 @@ export function GameplayLoop() {
           <ErrMsgDisplay errMsg1={errMsg1} errMsg2={errMsg2} />
         </div>
       </div>
-      <div className="middle_container">
+      <div className={styles.middle_container}>
         <GameOutput
           wordArr={wordArr}
           guessedLettersArr={guessedLettersArr}
@@ -198,7 +203,7 @@ export function GameplayLoop() {
           hasLost={hasLost}
         />
       </div>
-      <div className="bottom_container">
+      <div className={styles.bottom_container}>
         <LetterInputDisplay
           word={word}
           handleUserInput={handleUserInput}

@@ -1,6 +1,6 @@
 import { keyboardArr } from "../../utils/keyboardArr";
 import { Button } from "../reusable ui_components/Button";
-// import "./components.css";
+// import "../components.css";
 import styles from "./LetterInputDisplay.module.css";
 
 export const LetterInputDisplay = ({

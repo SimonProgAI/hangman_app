@@ -7,19 +7,7 @@
 .button:hover {
   cursor: pointer;
 }
-.button_container {
-  display: grid;
-  grid-template-areas: "random restart" "user restart" "error error";
-  grid-template-columns: 2.4fr 1fr;
-  grid-template-rows: 7.5vh 7.5vh;
-  border: solid 0.2em rgb(0, 0, 0);
-  border-radius: 1em;
-  width: 50vw;
-  height: auto;
-  justify-self: center;
-  background-color: white;
-  padding-bottom: 4vh;
-}
+
 .randomWord_div,
 .userWord_div {
   grid-area: random;
@@ -85,4 +73,46 @@
 .resetGame_btn:hover {
   background-color: #f44336;
   color: white;
+}
+
+@media only screen and (max-width: 768px){
+    .randomWord_div,
+  .userWord_div {
+    display: flex;
+    width: 70vw;
+    height: 12vh;
+    flex-direction: row;
+    align-items: center;
+  }
+  .userWord_div {
+    margin-top: 3vh;
+  }
+  .randomWord_btn,
+  .userWord_btn {
+    width: 30vw;
+    height: 8vh;
+    margin-right: 0.5vh;
+    justify-content: center;
+  }
+  .numberOfLetters_input,
+  .userWord_input {
+    height: 6vh;
+    width: 100%;
+  }
+  .numOfLetters_input {
+    width: 20vw;
+  }
+  .userWord_input {
+    width: 35vw;
+    margin-bottom: 2px;
+  }
+  .errMsg {
+    font-size: medium;
+    margin-top: 6vh;
+    margin-left: 5vw;
+  }
+  .resetGame_btn {
+    width: 25vw;
+    height: 19vh;
+  }
 }

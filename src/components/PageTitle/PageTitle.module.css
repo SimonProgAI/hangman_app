@@ -4,10 +4,19 @@
 .title_span{
         border-bottom: solid rgb(0, 0, 0);
         border-bottom-width: 0.5vw ;
-        width: 3vw;
+        width: 4vw;
         display:inline-block;
         margin: 0vh 0.5vw;
         user-select: none;
         font-size: 3vw ;
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     }
+
+@media only screen and (max-width: 768px) {
+    .title_span{
+        border-bottom-width: 0.5vw ;
+        width: 7vw;
+        margin: 0vh 0.9vw;
+        font-size: 7vw ;
+    } 
+}

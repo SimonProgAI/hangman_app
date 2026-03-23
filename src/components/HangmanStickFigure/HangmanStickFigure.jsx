@@ -1,4 +1,4 @@
-import "../components.css";
+// import "../components.css";
 import styles from "./HangmanStickFigure.module.css";
 
 export const HangmanStickfigure = ({ count }) => {

@@ -1,3 +1,5 @@
+import validation from "../messages/validation.json"
+
 export async function randomWordApiCall(
   wordLen: number,
 ): Promise<string | undefined> {
@@ -12,17 +14,15 @@ export async function randomWordApiCall(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-        console.log(`data: ${data}`);
+        // console.log(`data: ${data}`);
       const randomWord = data[0];
-        console.log(`randomWord: ${randomWord}`);
+        // console.log(`randomWord: ${randomWord}`);
       return randomWord;
     } catch (error) {
       const errMsg: string = `Error fetching data. ${error}. User Word mode is still playable.`;
       console.log(errMsg);
     }
-    const ifAllFailedMsg: string =
-      "All random word providers failed. User Word mode is still playable.";
-    alert(ifAllFailedMsg);
-    console.log(ifAllFailedMsg);
+    alert(validation.ifAllFailedMsg);
+    console.log(validation.ifAllFailedMsg);
   }
 }
