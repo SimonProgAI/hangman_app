@@ -40,15 +40,12 @@
 }
 
 @media only screen and (max-width: 768px){
-  .middle_container {
-    width: 98vw;
-    margin: auto;
-  }
+
   .processedWordArr_div {
     width: 100%;
   }
   .letter_display {
-    font-size: 3vh;
+    font-size: 5vh;
     flex: 1;
   }
   .hasLost_msg,

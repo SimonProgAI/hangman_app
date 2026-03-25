@@ -8,8 +8,8 @@
   cursor: pointer;
 }
 
-.randomWord_div,
-.userWord_div {
+.randomWord_div/* ,
+.userWord_div  */ {
   grid-area: random;
   width: 30vw;
   height: 7vh;
@@ -54,6 +54,12 @@
 .userWord_input {
   width: 13vw;
 }
+.revealWord_btn {
+  grid-area: reveal;
+  width: 3vw;
+  height: 5vh;
+  border-radius: 0.5em;
+}
 
 /*restGame_btn_div*/
 .resetGame_btn_div {
@@ -75,8 +81,8 @@
   color: white;
 }
 
-@media only screen and (max-width: 768px){
-    .randomWord_div,
+@media only screen and (max-width: 768px) {
+  .randomWord_div,
   .userWord_div {
     display: flex;
     width: 70vw;
@@ -94,6 +100,7 @@
     margin-right: 0.5vh;
     justify-content: center;
   }
+
   .numberOfLetters_input,
   .userWord_input {
     height: 6vh;

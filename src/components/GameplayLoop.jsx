@@ -39,7 +39,8 @@ export function GameplayLoop() {
   //USER_WORD
   const createUserWord = () => {
     const userWord = userWordRef.current.value;
-    if (userWord.length < 2 || userWord.length > 17) {
+    
+    if (userWord.length < 3 || userWord.length > 17) {
       setErrMsg2(validMsg.tooShortUser);
     } else if (userWord.includes("--")) {
       setErrMsg2(validMsg.doubleHyphen);
@@ -53,14 +54,13 @@ export function GameplayLoop() {
       setWord(userWord.toUpperCase());
       setIsDisabled(true);
       setGuessedLettersArr([...guessedLettersArr, "-"]);
-      setErrMsg1("");
       setErrMsg2("");
     }
     userWordRef.current.value = "";
     return userWord;
   };
   //console.log(`userWord is set to ${userWord}`);
-
+console.log("userWordRef: ",userWordRef)
   //RANDOM_WORD
   const handleRandomWord = async () => {
     const randomWordLength = Number(randomWordLengthRef.current.value);
@@ -102,9 +102,9 @@ export function GameplayLoop() {
       setGuessedLettersArr([...guessedLettersArr, upperCaseLetters]);
       playSoundFx(correctInputSound);
     }
-      //console.log('guessedLettersArr:', guessedLettersArr)
-      //console.log(`count is ${count+1}`);
-      //console.log(`userInput: ${letter}`);
+    //console.log('guessedLettersArr:', guessedLettersArr)
+    //console.log(`count is ${count+1}`);
+    //console.log(`userInput: ${letter}`);
   };
 
   //HASWON/HASLOST

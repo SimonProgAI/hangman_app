@@ -24,3 +24,18 @@
   color: white !important;
   background-color: #008cba;
 }
+
+@media only screen and (max-width: 768px){
+  .btnInput_div {
+    height: auto;
+    width: 98vw;
+    height: 30vh;
+    margin: auto;
+  }
+  .indv_btns {
+    width: 9.5vw;
+    height: 6vh;
+    font-size: 3.5vh;
+    margin: auto;
+  }
+}
