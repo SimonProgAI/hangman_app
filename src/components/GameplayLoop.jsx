@@ -21,10 +21,19 @@ import correctInputSound1 from "../audio/soft-subtle-ui-pop-sfx-348820.mp3";
 import styles from "./GameplayLoop.module.css";
 
 export function GameplayLoop() {
+  const {
+    tooShortUser,
+    doubleHyphen,
+    noSpaces,
+    hyphenEdges,
+    invalidChars,
+    failedFetch,
+    tooShortRandom,
+  } = validMsg;
+
   const randomWordLengthRef = useRef(0);
-  const userWordRef = useRef("");
-  const [errMsg1, setErrMsg1] = useState("");
-  const [errMsg2, setErrMsg2] = useState("");
+  const userWordRef = useRef(null);
+  const [errMsg, setErrMsg] = useState("");
   const [word, setWord] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [userInput, setUserInput] = useState("");
@@ -37,47 +46,45 @@ export function GameplayLoop() {
   const correctInputSound = loadSoundFx(correctInputSound1);
 
   //USER_WORD
-  const createUserWord = () => {
+  function createUserWord() {
     const userWord = userWordRef.current.value;
-    
     if (userWord.length < 3 || userWord.length > 17) {
-      setErrMsg2(validMsg.tooShortUser);
+      setErrMsg(tooShortUser);
     } else if (userWord.includes("--")) {
-      setErrMsg2(validMsg.doubleHyphen);
+      setErrMsg(doubleHyphen);
     } else if (userWord.includes(" ")) {
-      setErrMsg2(validMsg.noSpaces);
+      setErrMsg(noSpaces);
     } else if (userWord.startsWith("-") || userWord.endsWith("-")) {
-      setErrMsg2(validMsg.hyphenEdges);
+      setErrMsg(hyphenEdges);
     } else if (!hasOnlyLettersAndHyphen(userWord)) {
-      setErrMsg2(validMsg.invalidChars);
+      setErrMsg(invalidChars);
     } else if (hasOnlyLettersAndHyphen(userWord)) {
       setWord(userWord.toUpperCase());
       setIsDisabled(true);
       setGuessedLettersArr([...guessedLettersArr, "-"]);
-      setErrMsg2("");
+      setErrMsg("");
     }
-    userWordRef.current.value = "";
-    return userWord;
-  };
+    userWordRef.current.value = null;
+  }
   //console.log(`userWord is set to ${userWord}`);
-console.log("userWordRef: ",userWordRef)
+  // console.log("userWordRef: ", userWordRef);
+
   //RANDOM_WORD
-  const handleRandomWord = async () => {
+  async function handleRandomWord() {
     const randomWordLength = Number(randomWordLengthRef.current.value);
     if (randomWordLength < 3 || randomWordLength > 9) {
-      setErrMsg1(validMsg.tooShortRandom);
+      setErrMsg(tooShortRandom);
       return;
     }
     setIsDisabled(true);
     const fetchedWord = await randomWordApiCall(randomWordLength);
     if (!fetchedWord) {
-      setErrMsg1(validMsg.failedFetch);
+      setErrMsg(failedFetch);
     }
     setWord(fetchedWord.toUpperCase());
-    setErrMsg1("");
-    setErrMsg2("");
+    setErrMsg("");
     //console.log('function handleRandomWord called')
-  };
+  }
   //console.log(`randomWord is set to ${randomWord}`);
 
   //WORDARR
@@ -91,7 +98,7 @@ console.log("userWordRef: ",userWordRef)
   // console.log("wordArr is", wordArr);
 
   //USER_INPUT
-  const handleUserInput = (letter, index) => {
+  function handleUserInput(letter) {
     setUserInput(letter);
     const upperCaseLetters = letter.toUpperCase();
     if (!wordArr.includes(upperCaseLetters)) {
@@ -105,7 +112,7 @@ console.log("userWordRef: ",userWordRef)
     //console.log('guessedLettersArr:', guessedLettersArr)
     //console.log(`count is ${count+1}`);
     //console.log(`userInput: ${letter}`);
-  };
+  }
 
   //HASWON/HASLOST
   const hasWon = wordArr.every((letter) => guessedLettersArr.includes(letter))
@@ -160,7 +167,7 @@ console.log("userWordRef: ",userWordRef)
   }, []);
 
   //RESET_GAME
-  const handleRestart = () => {
+  function handleRestart() {
     sessionStorage.clear();
     setWord("");
     setIsDisabled(false);
@@ -168,11 +175,10 @@ console.log("userWordRef: ",userWordRef)
     setGuessedLettersArr([]);
     setWrongGuessesArr([]);
     setVisibilityArr([]);
-    setErrMsg1("");
-    setErrMsg2("");
+    setErrMsg("");
     randomWordLengthRef.current.value = "";
     //console.log(sessionStorage)
-  };
+  }
 
   //FINAL_RENDERER
   return (
@@ -190,7 +196,7 @@ console.log("userWordRef: ",userWordRef)
             wordRef={userWordRef}
           />
           <ResetGame onClickFunction={handleRestart} />
-          <ErrMsgDisplay errMsg1={errMsg1} errMsg2={errMsg2} />
+          <ErrMsgDisplay errMsg={errMsg} />
         </div>
       </div>
       <div className={styles.middle_container}>

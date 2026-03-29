@@ -43,7 +43,7 @@
   height: auto;
   justify-self: center;
   background-color: white;
-  padding-bottom: 4vh;
+  
 }
 
 @media only screen and (max-width: 768px) {
@@ -57,6 +57,7 @@
   .button_container {
     width: 96vw;
     height: auto;
+    padding-top: 3vh;
     padding-bottom: 3vh;
   }
 

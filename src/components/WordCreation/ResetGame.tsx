@@ -7,12 +7,13 @@ export interface ResetGameProps{
 }
 
 export function ResetGame({ onClickFunction }: ResetGameProps) {
+  const {resetGameBtn} = ui_text;
   return (
     <div className={styles.resetGame_btn_div}>
       <Button
         onClick={onClickFunction}
         className={`${styles.resetGame_btn} ${styles.button}`}
-        children={ui_text.resetGameBtn}
+        children={resetGameBtn}
       />
     </div>
   );

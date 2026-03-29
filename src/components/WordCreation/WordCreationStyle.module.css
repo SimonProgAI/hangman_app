@@ -8,10 +8,10 @@
   cursor: pointer;
 }
 
-.randomWord_div/* ,
-.userWord_div  */ {
+.randomWord_div,
+.userWord_div {
   grid-area: random;
-  width: 30vw;
+  width: 35vw;
   height: 7vh;
   margin: 0.6vh 0.5vw;
 }
@@ -26,6 +26,7 @@
 .numOfLetters_input {
   height: 5vh;
   font-size: 2vh;
+  border-radius: 0.5em;
 }
 
 /*randomWord_div*/
@@ -37,12 +38,13 @@
   color: white;
 }
 .numOfLetters_input {
-  width: 5vw;
+  width: 7vw;
 }
 
 /*userWord_div*/
 .userWord_div {
   grid-area: user;
+  margin-left: 0.5vw;
 }
 .userWord_btn {
   border: 0.3vh solid #008cba;
@@ -56,9 +58,11 @@
 }
 .revealWord_btn {
   grid-area: reveal;
-  width: 3vw;
-  height: 5vh;
+  width: 4vw;
+  height: 5.5vh;
+  margin-bottom: 0.1vh;
   border-radius: 0.5em;
+  font-size: 1.5vh;
 }
 
 /*restGame_btn_div*/
@@ -82,44 +86,45 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .randomWord_div,
-  .userWord_div {
+  .randomWord_div {
     display: flex;
-    width: 70vw;
-    height: 12vh;
     flex-direction: row;
+    width: 50vw;
+    height: auto;
     align-items: center;
   }
   .userWord_div {
-    margin-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    width: 85vw;
+    height: auto;
+    margin-top: 1vh;
   }
   .randomWord_btn,
   .userWord_btn {
-    width: 30vw;
+    width: auto;
     height: 8vh;
     margin-right: 0.5vh;
     justify-content: center;
   }
-
-  .numberOfLetters_input,
-  .userWord_input {
+  .revealWord_btn {
+    width: auto;
+  }
+  .numberOfLetters_input {
     height: 6vh;
-    width: 100%;
+    width: auto;
   }
-  .numOfLetters_input {
-    width: 20vw;
-  }
+
   .userWord_input {
     width: 35vw;
     margin-bottom: 2px;
+    height:6vh;
   }
-  .errMsg {
-    font-size: medium;
-    margin-top: 6vh;
-    margin-left: 5vw;
-  }
+
   .resetGame_btn {
-    width: 25vw;
-    height: 19vh;
+    width: auto;
+    height: 8vh;
+    margin-left: -30vw;
+    margin-top: auto;
   }
 }

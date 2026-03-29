@@ -5,13 +5,18 @@ import urls from "../../messages/urls.json";
 import ui_text from "../../messages/ui_text.json";
 import styles from "./Footer.module.css";
 
-interface FooterObj { link: string; logo: string };
+interface FooterObj {
+  link: string;
+  logo: string;
+}
 type FooterObjArr = FooterObj[];
 
+const { copyright } = ui_text;
+const { githubLink, linkedinLink, emailLink } = urls;
 const footerObjArr: FooterObjArr = [
-  { link: urls.githubLink, logo: githubLogo },
-  { link: urls.linkedinLink, logo: linkedinLogo },
-  { link: urls.emailLink, logo: emailLogo },
+  { link: githubLink, logo: githubLogo },
+  { link: linkedinLink, logo: linkedinLogo },
+  { link: emailLink, logo: emailLogo },
 ];
 
 const footerTagsArr = footerObjArr.map((obj: FooterObj) => {
@@ -27,7 +32,7 @@ export function Footer() {
     <div>
       <footer className={styles.footer}>
         {footerTagsArr}
-        <h3>{ui_text.copyright}</h3>
+        <h3>{copyright}</h3>
       </footer>
     </div>
   );
