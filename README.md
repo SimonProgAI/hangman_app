@@ -40,7 +40,7 @@ Try the game instantly: [Hangman Game Live](https://simonprogai.github.io/hangma
 - **Development:** Simon Lupien
 - **Sound Effects:** [Universfield on Pixabay](https://pixabay.com/collections/100-best-sound-fx-24048920/)
 - **Random Word APIs:** [random-word-api.vercel.app](https://random-word-api.vercel.app/), [random-words-api.kushcreates.com](https://random-words-api.kushcreates.com/api),
-[https://random-word-api.herokuapp.com](https://random-word-api.herokuapp.com/)
+[random-word-api.herokuapp.com](https://random-word-api.herokuapp.com/)
 
 ## License
 
