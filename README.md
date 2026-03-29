@@ -4,10 +4,10 @@ A modern, React-based Hangman game that allows users to play with randomly gener
 
 ## Features
 
-- Random word generation via API
+- Robust random word generation with automatic multi‑API fallback
 - User-defined word input
-- Animated hangman stick figure
-- On-screen keyboard input display
+- Animated SVG hangman stick figure
+- On-screen dynamic keyboard input display
 - Win/loss messaging
 - Game reset functionality
 - Session storage for persistent game state
