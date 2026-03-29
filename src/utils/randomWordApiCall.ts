@@ -1,12 +1,13 @@
-import validation from "../messages/validation.json"
+import validation from "../messages/validation.json";
 
 export async function randomWordApiCall(
   wordLen: number,
 ): Promise<string | undefined> {
-// console.log("function randomWordApiCall called");
+  // console.log("function randomWordApiCall called");
   const url1 = `https://random-word-api.herokuapp.com/word?length=${wordLen}`;
   const url2 = `https://random-word-api.vercel.app/api?words=1&length=${wordLen}`;
-  const urlArr: string[] = [url1, url2];
+  const url3 = `https://random-words-api.kushcreates.com/api?language=en&length=${wordLen}`;
+  const urlArr: string[] = [url1, url2, url3];
   for (let url of urlArr) {
     try {
       const response = await fetch(url);
@@ -14,9 +15,9 @@ export async function randomWordApiCall(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-        // console.log(`data: ${data}`);
+      // console.log(`data: ${data}`);
       const randomWord = data[0];
-        // console.log(`randomWord: ${randomWord}`);
+      // console.log(`randomWord: ${randomWord}`);
       return randomWord;
     } catch (error) {
       const errMsg: string = `Error fetching data. ${error}. User Word mode is still playable.`;
