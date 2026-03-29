@@ -1,10 +1,15 @@
-import './App.css';
-import GameModeDisplay from './components/GameModeDisplay';
+
+import {GameplayLoop} from './components/GameplayLoop';
+import { Footer } from './components/Footer/Footer';
+import { PageTitle } from './components/PageTitle/PageTitle';
+
 function App() {
 
   return(
     <div>
-      <GameModeDisplay/>
+      <PageTitle/>
+      <GameplayLoop/>
+      <Footer/>
     </div>
   );
 

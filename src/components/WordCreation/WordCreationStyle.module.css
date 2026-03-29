@@ -1,0 +1,130 @@
+.button {
+  color: black;
+  background-color: white;
+  border: 4vh solid;
+  font-size: 2vh;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.randomWord_div,
+.userWord_div {
+  grid-area: random;
+  width: 35vw;
+  height: 7vh;
+  margin: 0.6vh 0.5vw;
+}
+.randomWord_btn,
+.userWord_btn {
+  width: 15vw;
+  height: 6vh;
+  border-radius: 0.5em;
+  font-size: 2.5vh;
+}
+.userWord_input,
+.numOfLetters_input {
+  height: 5vh;
+  font-size: 2vh;
+  border-radius: 0.5em;
+}
+
+/*randomWord_div*/
+.randomWord_btn {
+  border: 2px solid #04aa6d;
+}
+.randomWord_btn:hover {
+  background-color: #04aa6d;
+  color: white;
+}
+.numOfLetters_input {
+  width: 7vw;
+}
+
+/*userWord_div*/
+.userWord_div {
+  grid-area: user;
+  margin-left: 0.5vw;
+}
+.userWord_btn {
+  border: 0.3vh solid #008cba;
+}
+.userWord_btn:hover {
+  background-color: #008cba;
+  color: white;
+}
+.userWord_input {
+  width: 13vw;
+}
+.revealWord_btn {
+  grid-area: reveal;
+  width: 4vw;
+  height: 5.5vh;
+  margin-bottom: 0.1vh;
+  border-radius: 0.5em;
+  font-size: 1.5vh;
+}
+
+/*restGame_btn_div*/
+.resetGame_btn_div {
+  grid-area: restart;
+  width: 15vw;
+  height: 10vw;
+}
+.resetGame_btn {
+  width: 12vw;
+  height: 12vh;
+  border-radius: 1em;
+  border: 2px solid #f44336;
+  font-size: 2.5vh;
+  align-self: center;
+  margin-top: 1.5vh;
+}
+.resetGame_btn:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .randomWord_div {
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    height: auto;
+    align-items: center;
+  }
+  .userWord_div {
+    display: flex;
+    flex-direction: row;
+    width: 85vw;
+    height: auto;
+    margin-top: 1vh;
+  }
+  .randomWord_btn,
+  .userWord_btn {
+    width: auto;
+    height: 8vh;
+    margin-right: 0.5vh;
+    justify-content: center;
+  }
+  .revealWord_btn {
+    width: auto;
+  }
+  .numberOfLetters_input {
+    height: 6vh;
+    width: auto;
+  }
+
+  .userWord_input {
+    width: 35vw;
+    margin-bottom: 2px;
+    height:6vh;
+  }
+
+  .resetGame_btn {
+    width: auto;
+    height: 8vh;
+    margin-left: -30vw;
+    margin-top: auto;
+  }
+}
